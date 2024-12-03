@@ -8,3 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ .navbar-brand {
+    font-family: 'Brush Script MT', cursive; 
+    font-size: 2.5rem !important; 
+  }
