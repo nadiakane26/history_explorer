@@ -18,14 +18,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       ## Rememberable
       t.datetime :remember_created_at
       
-      # stripe customer_id
-      t.string :stripe_customer_id
-      
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
-
+    add_index :users, :username, unique: true
   end
 end
