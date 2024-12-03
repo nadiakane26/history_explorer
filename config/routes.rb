@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :regions
   get "pages/contact"
   get "pages/about"
   devise_for :users
