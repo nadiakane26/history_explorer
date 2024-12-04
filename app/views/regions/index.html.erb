@@ -1,16 +1,31 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Regions" %>
 
-<h1>Regions</h1>
-
-<div id="regions">
-  <% @regions.each do |region| %>
-    <%= render region %>
+<div class="bg-light py-5 mb-4">
+  <div class="container-fluid">
+    <h1 class="display-4">Minnesota Regions</h1>
+    <p class="lead">Click on a region to see all related articles or create a new one.</p>
+    <hr class="my-4">
+      <p class="lead">There are <%= Region.count %> Regions!</p>
     <p>
-      <%= link_to "Show this region", region %>
+      <%= link_to "Create a New Region", new_region_path, class: "btn btn-primary btn-lg" %>
     </p>
-  <% end %>
+  </div>
 </div>
 
-<%= link_to "New region", new_region_path %>
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+  <% @regions.each do |region| %>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><%= region.name %></h5>
+          <p class="card-text">
+            <%= region.description.present? ? truncate(region.description, length: 100) : "No description available." %>
+          </p>
+          <p class="mt-auto">
+            <%= link_to "View Landmarks (#{region.landmarks.count})", region_path(region), class: "btn btn-primary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
