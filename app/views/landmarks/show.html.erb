@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @landmark %>
+
+<div>
+  <%= link_to "Edit this landmark", edit_landmark_path(@landmark) %> |
+  <%= link_to "Back to landmarks", landmarks_path %>
+
+  <%= button_to "Destroy this landmark", @landmark, method: :delete %>
+</div>

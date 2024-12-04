@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Landmarks" %>
+
+<h1>Landmarks</h1>
+
+<div id="landmarks">
+  <% @landmarks.each do |landmark| %>
+    <%= render landmark %>
+    <p>
+      <%= link_to "Show this landmark", landmark %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New landmark", new_landmark_path %>
