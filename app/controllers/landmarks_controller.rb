@@ -6,6 +6,7 @@ class LandmarksController < ApplicationController
     @landmarks = Landmark.all
   end
 
+
   # GET /landmarks/1 or /landmarks/1.json
   def show
     @landmark = Landmark.find(params[:id])

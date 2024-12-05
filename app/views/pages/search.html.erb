@@ -1,0 +1,16 @@
+<h3>Search Results</h3>
+
+
+  <% if @landmarks.present? %>
+  <h4>Landmarks</h4>
+    <% @landmarks.each do |landmark| %>
+      <li><%= link_to landmark.name, landmark_path(landmark) %></li>
+    <% end %>
+  <% elsif @regions.present? %>
+  <h4>Region</h4>
+  <% @regions.each do |region| %>
+    <li><%= link_to region.name, region_path(region) %></li>
+  <% end %>
+   <% else %>
+    <li>No regions or landmarks found.</li>
+  <% end %>
