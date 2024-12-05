@@ -1,6 +1,5 @@
 class RegionsController < ApplicationController
-  before_action :set_region, only: %i[ show edit update destroy ]
-
+  
   # GET /regions or /regions.json
   def index
     @regions = Region.all
@@ -17,11 +16,12 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
+    @region = Region.find(params[:id])
   end
 
   # POST /regions or /regions.json
   def create
-    @region = Region.new(region_params)
+    @region = current_user.regions.build(region_params)
 
     respond_to do |format|
       if @region.save
@@ -36,6 +36,7 @@ class RegionsController < ApplicationController
 
   # PATCH/PUT /regions/1 or /regions/1.json
   def update
+    @region = Region.find(params[:id])
     respond_to do |format|
       if @region.update(region_params)
         format.html { redirect_to @region, notice: "Region was successfully updated." }
@@ -49,6 +50,7 @@ class RegionsController < ApplicationController
 
   # DELETE /regions/1 or /regions/1.json
   def destroy
+    @region = Region.find(params[:id])
     @region.destroy!
 
     respond_to do |format|
@@ -58,12 +60,7 @@ class RegionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_region
-      @region = Region.find(params.expect(:id))
-    end
-
-    # Only allow a list of trusted parameters through.
+   # Only allow a list of trusted parameters through.
     def region_params
       params.expect(region: [ :name, :description, :user_id ])
     end
