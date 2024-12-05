@@ -1,5 +1,6 @@
 class RegionsController < ApplicationController
-  
+  before_action :authenticate_user!
+  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   # GET /regions or /regions.json
   def index
     @regions = Region.all
@@ -64,5 +65,12 @@ class RegionsController < ApplicationController
    # Only allow a list of trusted parameters through.
     def region_params
       params.expect(region: [ :name, :description, :user_id ])
+    end
+
+    def check_admin
+      unless current_user.admin?
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to regions_path  # Redirect to the regions list or a different page
+      end
     end
 end
