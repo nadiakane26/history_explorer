@@ -1,5 +1,5 @@
 class LandmarksController < ApplicationController
-  before_action :set_landmark, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -18,6 +18,7 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks/1/edit
   def edit
+    @landmark = Landmark.find(params[:id])
   end
 
   # POST /landmarks or /landmarks.json
@@ -37,6 +38,7 @@ class LandmarksController < ApplicationController
 
   # PATCH/PUT /landmarks/1 or /landmarks/1.json
   def update
+    @landmark = Landmark.find(params[:id])
     respond_to do |format|
       if @landmark.update(landmark_params)
         format.html { redirect_to @landmark, notice: "Landmark was successfully updated." }
@@ -50,6 +52,7 @@ class LandmarksController < ApplicationController
 
   # DELETE /landmarks/1 or /landmarks/1.json
   def destroy
+    @landmark = Landmark.find(params[:id])
     @landmark.destroy!
 
     respond_to do |format|
@@ -59,11 +62,6 @@ class LandmarksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_landmark
-      @landmark = Landmark.find(params.expect(:id))
-    end
-
     # Only allow a list of trusted parameters through.
     def landmark_params
       params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude])
