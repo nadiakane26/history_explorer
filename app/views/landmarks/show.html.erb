@@ -3,11 +3,11 @@
   import "landmark";
   </script>
   <%end%>
-<p><span class="bg-light"><%= @landmark.region.name  %></span></p>
-<h1><%= @landmark.name %></h1>
-<span class="text-muted small">
+<h1><%= @landmark.name %><span class="btn btn-outline-primary btn-sm disabled mx-3 "><%= @landmark.region.name  %></span></h1>
+
+<p><span class="text-muted small">
 <%= @landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %> 
-</span>
+</span><p>
 
 <p><%=@landmark.description %></p>
 <div class="d-flex gap-2">
