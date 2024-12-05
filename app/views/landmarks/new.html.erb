@@ -1,11 +1,11 @@
 <% content_for :title, "New landmark" %>
 
-<h1>New landmark</h1>
+<h1>Create New Landmark</h1>
 
 <%= render "form", landmark: @landmark %>
 
 <br>
 
 <div>
-  <%= link_to "Back to landmarks", landmarks_path %>
+  <%= link_to "Back", landmarks_path, class: "btn btn-secondary" %>
 </div>

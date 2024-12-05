@@ -65,3 +65,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "geocoder", "~> 1.8"
+
+gem "faker"
