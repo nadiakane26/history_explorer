@@ -8,6 +8,5 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Landmark.all.each do |landmark|
-  landmark.update(description: Faker::Lorem.sentence(word_count: 100))
-end
+Role.create(name: 'user')
+Role.create(name: 'admin')

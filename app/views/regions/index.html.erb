@@ -3,12 +3,18 @@
 <div class="bg-light py-5 mb-4">
   <div class="container-fluid">
     <h1 class="display-4">Minnesota Regions</h1>
+<% if current_user.admin? %>
     <p class="lead">Click on a region to see all related articles or create a new one.</p>
+    <%else%>
+  <p class="lead">Click on a region to see all related articles.</p>
+<% end%>
     <hr class="my-4">
       <p class="lead">There are <%= Region.count %> Regions!</p>
+          <% if current_user.admin? %>
     <p>
       <%= link_to "Create a New Region", new_region_path, class: "btn btn-primary btn-lg" %>
     </p>
+    <% end%>
   </div>
 </div>
 
