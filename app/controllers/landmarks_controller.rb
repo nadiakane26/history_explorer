@@ -1,5 +1,7 @@
 class LandmarksController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :verify_landmark_user, only: [:edit, :update, :destroy]  # Changed method name here
+
 
   # GET /landmarks or /landmarks.json
   def index
@@ -67,4 +69,14 @@ class LandmarksController < ApplicationController
     def landmark_params
       params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude])
     end
+
+    def verify_landmark_user  
+      @landmark = Landmark.find(params[:id])
+      unless @landmark.user == current_user
+        respond_to do |format|
+            format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
+            format.json { render :show, status: :ok, location: @landmark }
+      end
+    end
+  end
 end
