@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :landmarks
   resources :regions
+  resources :landmarks do
+    resources :comments
+  end
+  
   get "pages/contact"
   get "pages/about"
   devise_for :users

@@ -17,3 +17,13 @@
 <%end %>
 <%= link_to "Back", landmarks_path, class: "btn btn-secondary" %>
   </div>
+
+  <!-- Comments -->
+  <h2>Comments</h2>
+  <div id="comments">
+    <%= render @landmark.comments %>
+  </div>
+
+
+  <h2>Add a comment:</h2>
+<%= render "comments/form", landmark: @landmark%>
