@@ -1,0 +1,19 @@
+
+<div >
+  <!-- Commenter Name -->
+ 
+    <%= comment.user.username %>
+    <i class="fas fa-clock fa-xs text-muted"></i> 
+    <!-- Display comment creation time -->
+    <small class="text-muted ml-1">
+      <%= time_ago_in_words(comment.updated_at) %> ago
+    </small>
+
+
+  <!-- Comment Body -->
+    <%= comment.body %>
+
+    <!-- Delete and Button -->
+    <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm me-2" %>
+</div>
+
