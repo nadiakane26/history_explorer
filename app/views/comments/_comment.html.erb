@@ -6,7 +6,8 @@
       <i class="fas fa-clock fa-xs text-muted"></i>
       <!-- Display comment creation time -->
       <small class="text-muted ml-1">
-        <%= comment.created_at.present? ? comment.created_at.strftime("%b %d, %Y %I:%M %p") : "Unknown Date" %>
+        <
+        %= comment.created_at.present? ? comment.created_at.strftime("%b %d, %Y %I:%M %p") : "Unknown Date" %>
       </small>
       <p><%= comment.body %></p>
 
