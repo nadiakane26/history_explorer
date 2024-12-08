@@ -7,6 +7,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.credentials.google_api_key%>&loading=async&libraries=places&callback=initMap">
+</script>
 
     <%= yield :head %>
 

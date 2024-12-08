@@ -1,13 +1,16 @@
 <% content_for :javascript do %>
   <script type="module">
-  import "landmark";
+  import "autocomplete";
   </script>
   <%end%>
+
 <h1><%= @landmark.name %><span class="btn btn-outline-primary btn-sm disabled mx-3 "><%= @landmark.region.name  %></span></h1>
 
 <p><span class="text-muted small">
 <%= @landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %> 
 </span><p>
+<input id= "autocomplete" placeholder = "Enter a place" type="text" />
+<div id='details'></div>
 
 <p><%=@landmark.description %></p>
 <div class="d-flex gap-2">
@@ -27,3 +30,6 @@
 
   <h2>Add a comment:</h2>
 <%= render "comments/form", landmark: @landmark, comment: @comment  %>
+
+
+<div id="map" style="height: 400px; width: 100%;"></div>

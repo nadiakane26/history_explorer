@@ -1,3 +1,9 @@
+<% content_for :javascript do %>
+  <script type="module">
+  import "autocomplete";
+  </script>
+  <%end%>
+  
 <%= form_with(model: landmark, html: { class: "container mt-4" }) do |form| %>
   <% if landmark.errors.any? %>
     <div class="alert alert-danger">
@@ -15,10 +21,13 @@
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :address, class: "form-label" %>
-    <%= form.text_field :address, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :address, class: "form-label" %>
+      <!-- Replace the default text field with the autocomplete input field -->
+      <input id="autocomplete" placeholder="Enter a place" type="text" class="form-control" name="address" />
+      <!-- Display the coordinates and address details here -->
+      <div id="details"></div>
+    </div>
 
   <div class="mb-3">
     <%= form.label :description, class: "form-label" %>
