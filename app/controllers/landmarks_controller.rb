@@ -12,6 +12,8 @@ class LandmarksController < ApplicationController
   # GET /landmarks/1 or /landmarks/1.json
   def show
     @landmark = Landmark.find(params[:id])
+    @comment = @landmark.comments.build
+    @comments = @landmark.comments.order(created_at: :desc)
   end
 
   # GET /landmarks/new
