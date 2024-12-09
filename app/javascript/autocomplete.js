@@ -1,45 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("This is autocomplete");
-
     let autocomplete;
+    let map;
+    let marker;
+  
+    // Initialize Map
+    async function initMap() {
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  
+      // Default position (St. Paul)
+      const defaultPosition = { lat: 44.9537, lng: -93.0900 };
+  
+      // Create the map
+      map = new Map(document.getElementById("map"), {
+        zoom: 13,
+        center: defaultPosition,
+        mapId: "Landmark",
+      });
 
+
+      // The marker
+      marker = new AdvancedMarkerElement({
+        map: map,
+        position: defaultPosition,
+        title: "Default Location",
+      });
+  
+      // Initialize Autocomplete after the map is ready
+      initAutocomplete();
+    }
+  
+    // Initialize Autocomplete
     function initAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'),
-            {
-                types: ['geocode', 'establishment'], // Allow both full addresses and establishments
-                componentRestrictions: { country: 'US' }, // Optional: restrict to US addresses
-                fields: ['place_id', 'geometry', 'formatted_address', 'name'] // Include full address and name
-            }
-        );
-
-        // Listen for when the user selects a place from the autocomplete suggestions
-        autocomplete.addListener('place_changed', onPlaceChanged);
-    }
-
-    function onPlaceChanged() {
-        var place = autocomplete.getPlace();
-
-        if (!place.geometry) {
-            // User did not select a valid prediction; reset the input field
-            document.getElementById('autocomplete').placeholder = 'Enter a place';
-        } else {
-            // Get the coordinates from the place's geometry object
-            var coordinates = place.geometry.location;
-            var lat = coordinates.lat();
-            var lng = coordinates.lng();
-
-            // Get the full address of the place or establishment
-            var address = place.formatted_address;
-            var name = place.name;
-
-            // Display the coordinates and address (or establishment name)
-            document.getElementById('details').innerHTML = `
-                Coordinates: ${lat}, ${lng}<br>
-            `;
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById("autocomplete"),
+        {
+          types: ["geocode", "establishment"],
+          componentRestrictions: { country: "US" },
+          fields: ["place_id", "geometry", "formatted_address", "name"],
         }
-    }
+      );
+  
+      autocomplete.addListener("place_changed", onPlaceChanged);
+  
+      // Get existing latitude and longitude from the hidden fields
+      const lat = parseFloat(document.getElementById("lat").value);
+      const lng = parseFloat(document.getElementById("lng").value);
 
-    // Initialize autocomplete
+      // If coordinates exist, update map with saved coordinates
+      if (!isNaN(lat) && !isNaN(lng)) {
+        const position = { lat, lng };
+        updateMap(position.lat, position.lng);
+  
+      }
+    }
+  
+    // Handle Place Change
+    function onPlaceChanged() {
+      const place = autocomplete.getPlace();
+  
+      if (!place.geometry) {
+        document.getElementById("autocomplete").placeholder = "Enter a valid place";
+      } else {
+        const { lat, lng } = place.geometry.location;
+        const name = place.name;
+        const address = place.formatted_address
+  
+        // Update the hidden lat/lng input fields
+        document.getElementById("lat").value = lat();
+        document.getElementById("lng").value = lng();
+        
+        // Update the address field with the selected place's address
+        document.getElementById("autocomplete").value = address;
+        document.getElementById("autocomplete").value = address;
+        console.log("Address selected:", address);
+
+        // Update the map and marker
+        updateMap(lat(), lng(), name);
+      }
+    }
+  
+    // Update Map Position
+    function updateMap(lat, lng, name = "Selected Location") {
+      const position = { lat, lng };
+  
+      // Pan map to new position
+      map.setCenter(position);
+  
+      // Update marker position
+      marker.position(position);
+      marker.title(name); // Use the name of the place for the marker's title
+    }
+  
+    // Initialize the map and autocomplete
+    initMap();
     initAutocomplete();
-});
+  });
+  
