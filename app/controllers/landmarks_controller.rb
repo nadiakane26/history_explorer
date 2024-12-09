@@ -1,7 +1,6 @@
 class LandmarksController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :verify_landmark_user, only: [:edit, :update, :destroy]  # Changed method name here
-
+  before_action :verify_landmark_user, only: [:edit, :update, :destroy]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -12,8 +11,6 @@ class LandmarksController < ApplicationController
   # GET /landmarks/1 or /landmarks/1.json
   def show
     @landmark = Landmark.find(params[:id])
-    @comment = @landmark.comments.build
-    @comments = @landmark.comments.order(created_at: :desc)
   end
 
   # GET /landmarks/new

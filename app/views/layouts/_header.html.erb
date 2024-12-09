@@ -6,6 +6,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <%= link_to "About", pages_about_path, class: "nav-link #{'active' if current_page?(pages_about_path)}" %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Browse
@@ -24,7 +25,6 @@
           </ul>
         </li>
           <%= link_to "Contact", pages_contact_path, class: "nav-link #{'active' if current_page?(pages_contact_path)}" %>
-          <%= link_to "About", pages_about_path, class: "nav-link #{'active' if current_page?(pages_about_path)}" %>
         </ul>
         <%= form_with(url: search_path, method: :get, local: true, class: "d-flex") do |form| %>
           <%= form.text_field :search, class: "form-control me-2", placeholder: "Search landmarks and regions", aria: { label: "Search" },style: "width: 250px;" %>
