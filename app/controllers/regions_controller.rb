@@ -1,5 +1,5 @@
 class RegionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   # GET /regions or /regions.json
   def index
@@ -9,6 +9,7 @@ class RegionsController < ApplicationController
   # GET /regions/1 or /regions/1.json
   def show
     @region = Region.find(params[:id])
+    @landmarks = @region.landmarks
   end
 
   # GET /regions/new

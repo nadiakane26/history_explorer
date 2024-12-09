@@ -1,20 +1,19 @@
-<% if @comments.present? %>
-  <% @comments.each do |comment| %>
-    <div>
-      <!-- Commenter Name -->
-      <strong><%= comment.user&.username || "Unknown User" %></strong>
-      <i class="fas fa-clock fa-xs text-muted"></i>
-      <!-- Display comment creation time -->
-      <small class="text-muted ml-1">
-        <%= comment.created_at.present? ? comment.created_at.strftime("%b %d, %Y %I:%M %p") : "Unknown Date" %>
-      </small>
-      <p><%= comment.body %></p>
+<div class="card mb-3">
+<div class="card-body">
+    <!-- Commenter Name -->
+    <strong><%= comment.user&.username || "Unknown User" %></strong>
+    <i class="fas fa-clock fa-xs text-muted"></i>
+    <!-- Display comment creation time -->
+    <small class="text-muted ml-1">
+    <%= comment.created_at.present? ? comment.created_at.strftime("%b %d, %Y %I:%M %p") : "Unknown Date" %>
+    </small>
+    
+    <p class="card-text">
+        <%= comment.body %>
+      </p>
 
-      <!-- Edit and Delete buttons -->
-      <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm me-2" %>
-      <%= link_to "Edit", edit_landmark_comment_path(@landmark, comment), class: "btn btn-warning btn-sm me-2" %>
+    <!-- Delete buttons -->
+    <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
     </div>
-  <% end %>
-<% else %>
-  <p>No comments yet. Be the first to comment!</p>
-<% end %>
+  </div>
+

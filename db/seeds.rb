@@ -8,5 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Role.create(name: 'user')
-Role.create(name: 'admin')
+# Ensure the users with IDs 1, 2, and 3 exist
+user_ids = [1, 2, 3]
+users = User.where(id: user_ids)
+
+# Iterate over each landmark
+Landmark.find_each do |landmark|
+  12.times do |i|
+    user = users[i % 3] # Cycles through users with IDs 1, 2, 3
+    landmark.comments.create!(
+      user: user,
+      body: Faker::Lorem.sentence(word_count: 10)
+    )
+  end
+end
+
+puts "Seeding completed successfully."
