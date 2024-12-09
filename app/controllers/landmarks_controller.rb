@@ -69,7 +69,7 @@ class LandmarksController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def landmark_params
-      params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude])
+      params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
     end
 
     def verify_landmark_user  

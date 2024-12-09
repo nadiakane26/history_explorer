@@ -28,6 +28,17 @@
 <%end %>
 <%= link_to "Back", landmarks_path, class: "btn btn-secondary" %>
   </div>
+  
+  <% if @landmark.images.attached? %>
+  <h3>Images:</h3>
+  <div class="landmark-images">
+    <% @landmark.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
+  </div>
+<% else %>
+  <p>No images uploaded yet.</p>
+<% end %>
 
   <div id="map"></div>
 

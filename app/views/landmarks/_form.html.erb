@@ -34,6 +34,11 @@
     <%= form.text_area :description, class: "form-control", rows: 5 %>
   </div>
 
+  <div class="field">
+  <%= form.label :images, "Upload Images" %>
+  <%= form.file_field :images, multiple: true %>
+</div>
+
   <div class="mb-3">
     <%= form.label :region_id, class: "form-label" %>
     <%= form.collection_select :region_id, Region.all, :id, :name, { prompt: "Select a category" }, { class: "form-select" } %>
