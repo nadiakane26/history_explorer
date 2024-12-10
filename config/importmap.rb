@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "landmark", to: "landmark.js"
 pin "autocomplete", to: "autocomplete.js"
+pin "load_more", to: "load_more.js"

@@ -1,6 +1,7 @@
 <% content_for :javascript do %>
   <script type="module">
   import "landmark";
+  import "load_more";
   </script>
   <%end%>
 
@@ -12,43 +13,59 @@
   };
 <% end %>
 
-<h1><%= @landmark.name %><span class="btn <%= region_button_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
 
-<p><span class="text-muted small">
-<%= @landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %> 
-</span><p>
+<div class="row justify-content-between">
+  <!-- Main content on the left side -->
+  <div class="col-lg-8">
+    <h1><%= @landmark.name %><span class="btn <%= region_button_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
 
-<p><%=@landmark.address %></p>
+    <p><span class="text-muted small">
+    <%= @landmark.user.username %> | <i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %>
+    </span></p>
 
-<% if @landmark.images.attached? %>
-<div class="landmark-images">
-  <% @landmark.images.each do |image| %>
-    <%=link_to image_tag(image), image %>
-  <% end %>
+    <p><%= @landmark.address %></p>
+
+    <% if @landmark.images.attached? %>
+      <div class="landmark-images">
+        <% @landmark.images.each do |image| %>
+          <%= link_to image_tag(image), image %>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No images uploaded yet.</p>
+    <% end %>
+
+    <p><%= @landmark.description %></p>
+
+    <div class="d-flex gap-2 my-1">
+      <% if @landmark.user == current_user %>
+        <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
+        <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this landmark?" } %>
+      <% end %>
+      <%= link_to "Back", landmarks_path, class: "btn btn-secondary btn-sm" %>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <!-- Comments on the right side -->
+  <div id= "comments-container" class="col-lg-4">
+    <h4>Comments</h4>
+    <div id="comments">
+      <%= render @comments %>
+    </div>
+  
+    <% if @comments.next_page %>
+      <div id="load-more-container">
+        <%= link_to 'Load More', landmark_path(@landmark, page: @comments.next_page), remote: true, id: 'load-more-comments', class: 'btn btn-primary btn-small mb-3' %>
+      </div>
+    <% end %>
+
+    <h2>Join the Conversation:</h2>
+    <%= render "comments/form", landmark: @landmark %>
+  </div>
 </div>
-<% else %>
-<p>No images uploaded yet.</p>
-<% end %>
-
-<p><%=@landmark.description %></p>
-<div class="d-flex gap-2 my-1">
-<% if @landmark.user == current_user %>
-  <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
-  <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm ", data: { confirm: "Are you sure you want to delete this landmark?" } %>
-<%end %>
-<%= link_to "Back", landmarks_path, class: "btn btn-secondary btn-sm" %>
-  </div>
-
-  <div id="map"></div>
-
-  <!-- Comments -->
-  <h2>Comments</h2>
-  <div id="comments">
-    <%= render @landmark.comments %>
-  </div>
 
 
-  <h2>Add a comment:</h2>
-<%= render "comments/form", landmark: @landmark  %>
 
 

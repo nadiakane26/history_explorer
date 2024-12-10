@@ -1,13 +1,12 @@
 <%= form_with(model: [landmark, landmark.comments.build]) do |form| %>
-    <div class="form-control mb-3">
+    <div class= mb-3">
       <!-- Comment Body Field -->
-      <%= form.label :body, "Comment", class: "form-label" %>
-      <%= form.text_area :body, class: "form-control", rows: 4 %>
+      <%= form.text_area :body, class: "form-control", rows: 2 %>
     </div>
   
     <div>
     <!-- Submit Button -->
-    <%= form.submit "Post Comment", class: "btn btn-primary" %>
+    <%= form.submit "Post Comment", class: "btn btn-primary btn-sm my-2" %>
   </div>
   <% end %>
   
