@@ -72,8 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Update the address field with the selected place's address
         document.getElementById("autocomplete").value = address;
-        document.getElementById("autocomplete").value = address;
-        console.log("Address selected:", address);
+        console.log("Address:", address);
 
         // Update the map and marker
         updateMap(lat(), lng(), name);

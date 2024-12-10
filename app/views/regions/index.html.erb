@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <h1 class="display-4">Minnesota Regions</h1>
 <% if current_user&.admin? %>
-    <p class="lead">Click on a region to see all related articles or create a new one.</p>
+    <p class="lead">Click on a region to see all related landmarks or create a new one.</p>
     <%else%>
-  <p class="lead">Click on a region to see all related articles.</p>
+  <p class="lead">Click on a region to see all related landmarks.</p>
 <% end%>
     <hr class="my-4">
       <p class="lead">There are <%= Region.count %> Regions!</p>

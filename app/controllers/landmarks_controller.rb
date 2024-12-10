@@ -4,7 +4,7 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks or /landmarks.json
   def index
-    @landmarks = Landmark.all
+    @landmarks = Landmark.order(created_at: :desc)
   end
 
 
@@ -78,4 +78,5 @@ class LandmarksController < ApplicationController
       end
     end
   end
+
 end

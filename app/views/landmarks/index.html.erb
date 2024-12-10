@@ -18,7 +18,7 @@
           <!-- Cards with a equal height -->
           <div class="card d-flex flex-column h-100 landmark-card">
             <div class="card-body d-flex flex-column">
-            <p><span class="btn btn-outline-primary btn-sm disabled"><%= landmark.region.name  %></span></p>
+            <p><span class="btn <%= region_button_color(landmark.region)  %> btn-sm disabled"><%= landmark.region.name %></span></p>
               <h5 class="card-title">
                 <%= content_tag :span, landmark.name, class: "text-decoration-none" %>
                 
