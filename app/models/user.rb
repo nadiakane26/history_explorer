@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :landmarks, dependent: :destroy
   has_many :regions, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes
+  
   has_and_belongs_to_many :roles
   validates :first_name, :last_name, presence: true
   validates :username, presence: true, uniqueness: true      

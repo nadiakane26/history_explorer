@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  get "likes/create"
+  get "likes/destroy"
   resources :regions
   resources :landmarks do
-    resources :comments
+    resources :comments 
+    
   end
+  
+  resources :likes
   
   get "pages/contact"
   get "pages/about"
