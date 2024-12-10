@@ -4,7 +4,7 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks or /landmarks.json
   def index
-    @landmarks = Landmark.order(created_at: :desc)
+    @landmarks = Landmark.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
   end
 
 
