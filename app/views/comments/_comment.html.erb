@@ -12,8 +12,14 @@
         <%= comment.body %>
       </p>
 
-    <!-- Delete buttons -->
-    <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <div class="button-container d-flex align-items-center gap-2">
+      <!-- Delete Button -->
+      <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+    
+      <!-- Like/Unlike Button -->
+      <%= render 'likes/like_button', likeable: comment %>
+    </div>
+
     </div>
   </div>
 
