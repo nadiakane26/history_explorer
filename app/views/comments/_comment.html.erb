@@ -1,5 +1,5 @@
 <div class="card mb-3">
-<div class="card-body">
+<div class="card-body custom-lead">
     <!-- Commenter Name -->
     <strong><%= comment.user&.username || "Unknown User" %></strong>
     <i class="fas fa-clock fa-xs text-muted"></i>
@@ -14,8 +14,9 @@
 
       <div class="button-container d-flex align-items-center gap-2">
       <!-- Delete Button -->
+       <% if current_user == comment.user %>
       <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
-    
+      <% end %>
       <!-- Like/Unlike Button -->
       <%= render 'likes/like_button', likeable: comment %>
     </div>

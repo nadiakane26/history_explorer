@@ -3,11 +3,11 @@
   <div class="bg-light py-5 mb-4">
     <div class="container-fluid">
       <h1 class="display-4">Landmarks</h1>
-      <p class="lead">Click on an landmark to read more or create a new one.</p>
+      <p>Click on an landmark to read more or create a new one.</p>
       <hr class="my-4">
-      <p class="lead">There are <%= Landmark.count %> landmarks!</p>
+      <p>There are <%= Landmark.count %> landmarks!</p>
       <p>
-        <%= link_to "Create a New Landmark", new_landmark_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Create a New Landmark", new_landmark_path, class: "btn btn-dark btn-lg" %>
       </p>
     </div>
   </div>
@@ -23,7 +23,7 @@
                 <%= content_tag :span, landmark.name, class: "text-decoration-none" %>
                 
               </h5>
-                <p class="card-text text-muted small">
+                <p class="card-text text-muted custom-lead">
                   <span>
                     <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.in_time_zone('Central Time (US & Canada)').strftime("%B %d, %Y") %> 
                   </span>

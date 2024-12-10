@@ -4,21 +4,21 @@
   <div class="container-fluid">
     <h1 class="display-4">Minnesota Regions</h1>
 <% if current_user&.admin? %>
-    <p class="lead">Click on a region to see all related landmarks or create a new one.</p>
+    <p>Click on a region to see all related landmarks or create a new one.</p>
     <%else%>
-  <p class="lead">Click on a region to see all related landmarks.</p>
+  <p>Click on a region to see all related landmarks.</p>
 <% end%>
     <hr class="my-4">
-      <p class="lead">There are <%= Region.count %> Regions!</p>
+      <p>There are <%= Region.count %> Regions!</p>
           <% if current_user&.admin? %>
     <p>
-      <%= link_to "Create a New Region", new_region_path, class: "btn btn-primary btn-lg" %>
+      <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
     </p>
     <% end%>
   </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-4 custom-lead">
   <% @regions.each do |region| %>
     <div class="col">
       <div class="card h-100">

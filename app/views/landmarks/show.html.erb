@@ -37,7 +37,7 @@
 
     <p><%= @landmark.description %></p>
 
-    <div class="button-container d-flex align-items-center gap-2">
+    <div class="button-container d-flex align-items-center gap-2 custom-lead">
       <% if @landmark.user == current_user %>
         <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
         <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this landmark?" } %>
@@ -58,11 +58,11 @@
   
     <% if @comments.next_page %>
       <div id="load-more-container">
-        <%= link_to 'Load More', landmark_path(@landmark, page: @comments.next_page), remote: true, id: 'load-more-comments', class: 'btn btn-primary btn-small mb-3' %>
+        <%= link_to 'Load More', landmark_path(@landmark, page: @comments.next_page), remote: true, id: 'load-more-comments', class: 'btn btn-light btn-small mb-3' %>
       </div>
     <% end %>
 
-    <h2>Join the Conversation:</h2>
+    <h4>Join the Conversation:</h4>
     <%= render "comments/form", landmark: @landmark %>
   </div>
 </div>
