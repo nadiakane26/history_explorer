@@ -1,6 +1,7 @@
 <%# _like_button.html.erb %>
-<% like = current_user.likes.find_by(likeable: likeable) %>
 
+<% if current_user %>
+<% like = current_user&likes.find_by(likeable: likeable) %>
 <% if like.nil? %>
   <!-- Like Button -->
   <%= button_to likes_path, 
@@ -14,8 +15,19 @@
   <%= button_to like_path(like), 
                 method: :delete, 
                 class: "btn btn-primary btn-sm" do %>
-    Unlike <i class="fa-regular fa-thumbs-down"></i>
+    Unlike <i class
+    ="fa-regular fa-thumbs-down"></i>
   <% end %>
+<% end %>
+<% else %>
+  <!-- Like button for users not signed in -->
+  <%= button_to likes_path, 
+                params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, 
+                method: :post, 
+                class: "btn btn-primary btn-sm" do %>
+    Like <i class="fa-regular fa-thumbs-up"></i>
+  <% end %>
+  
 <% end %>
 
 <!-- Display like count with singular/plural -->

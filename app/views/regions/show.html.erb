@@ -12,7 +12,7 @@
                 <%= content_tag :span, landmark.name, class: "text-decoration-none" %>
                 
               </h5>
-                <p class="card-text text-muted small">
+                <p class="card-text text-muted custom-lead">
                   <span>
                     <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.in_time_zone('Central Time (US & Canada)').strftime("%B %d, %Y") %> 
                   </span>
@@ -27,7 +27,7 @@
     <% end %>
 
 <div class="d-flex gap-2">
-<% if current_user.admin? %>
+<% if current_user&.admin? %>
   <%= link_to 'Edit', edit_region_path(@region),  class: "btn btn-warning btn-sm" %> 
   <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this landmark?" } %>
 <% end %>
