@@ -13,17 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Create the map
       map = new Map(document.getElementById("map"), {
-        zoom: 13,
+        zoom: 14,
         center: defaultPosition,
         mapId: "Landmark",
       });
 
 
       // The marker
-      marker = new AdvancedMarkerElement({
+     const marker = new AdvancedMarkerElement({
         map: map,
         position: defaultPosition,
-        title: "Default Location",
+        title: "St. Paul",
       });
   
       // Initialize Autocomplete after the map is ready
@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Update the address field with the selected place's address
         document.getElementById("autocomplete").value = address;
-        console.log("Address:", address);
 
         // Update the map and marker
         updateMap(lat(), lng(), name);
