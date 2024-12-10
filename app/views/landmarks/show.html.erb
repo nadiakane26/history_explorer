@@ -12,7 +12,7 @@
   };
 <% end %>
 
-<h1><%= @landmark.name %><span class="btn btn-outline-primary btn-sm disabled mx-3 "><%= @landmark.region.name  %></span></h1>
+<h1><%= @landmark.name %><span class="btn <%= region_button_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
 
 <p><span class="text-muted small">
 <%= @landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %> 
