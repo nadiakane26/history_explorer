@@ -4,13 +4,20 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks or /landmarks.json
   def index
-    @landmarks = Landmark.order(created_at: :desc)
+    @landmarks = Landmark.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
   end
 
 
   # GET /landmarks/1 or /landmarks/1.json
   def show
     @landmark = Landmark.find(params[:id])
+    @comments = @landmark.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 6)
+
+    respond_to do |format|
+      format.html # Regular HTML request
+      format.js   # JavaScript request (for AJAX)
+    end
+
   end
 
   # GET /landmarks/new

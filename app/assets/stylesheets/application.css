@@ -27,7 +27,10 @@ display: block;
 }
 
 #map {
-  width: 100%;
+  width: 95%;
   height: 400px;
-  margin-top: 20px;
+  margin: 20px;
 }
+
+#comments-container {
+  margin-top: 100px; }

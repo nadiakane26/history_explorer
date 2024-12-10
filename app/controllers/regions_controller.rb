@@ -9,7 +9,6 @@ class RegionsController < ApplicationController
   # GET /regions/1 or /regions/1.json
   def show
     @region = Region.find(params[:id])
-    @landmarks = @region.landmarks
   end
 
   # GET /regions/new
