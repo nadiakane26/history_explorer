@@ -26,19 +26,34 @@
     <p><%= @landmark.address %></p>
 
     <% if @landmark.images.attached? %>
-      <div class="landmark-images">
-        <% @landmark.images.each do |image| %>
-       <%= link_to image, class: "img-link" do %>
-  <%= image_tag(image, alt: @landmark.name, class: "img-thumbnail", style: "width: 100%;") %>
-<% end %>
-        <% end %>
+     <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <% @landmark.images.each_with_index do |image, index| %>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index + 1 %>"></button>
+    <% end %>
+  </div>
+  <div class="carousel-inner">
+    <% @landmark.images.each_with_index do |image, index| %>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <%= image_tag image, class: "d-block w-100", alt: "Landmark Image #{index + 1}" %>
       </div>
+    <% end %>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
     <% end %>
 
     <p><%= @landmark.description %></p>
 
     <div class="button-container d-flex align-items-center gap-2 custom-lead">
-      <% if @landmark.user == current_user %>
+      <% if @landmark.user == current_user || current_user.admin? %>
         <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
         <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this landmark?" } %>
       <% end %>
