@@ -2,7 +2,7 @@ class PagesController < ApplicationController
     def index
     end
   
-    def contact
+    def nearby
     end
   
     def about

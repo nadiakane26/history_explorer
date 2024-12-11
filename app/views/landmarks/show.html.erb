@@ -28,7 +28,7 @@
     <% if @landmark.images.attached? %>
       <div class="landmark-images">
         <% @landmark.images.each do |image| %>
-          <%= link_to image_tag(image), image %>
+          <%= link_to image_tag(image), style: "width:200px" %>
         <% end %>
       </div>
     <% else %>
