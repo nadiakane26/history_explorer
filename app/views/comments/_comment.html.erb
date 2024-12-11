@@ -14,7 +14,7 @@
 
       <div class="button-container d-flex align-items-center gap-2">
       <!-- Delete Button -->
-       <% if current_user == comment.user || current_user.admin? %>
+       <% if current_user == comment.user || current_user&.admin? %>
       <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
       <% end %>
       <!-- Like/Unlike Button -->

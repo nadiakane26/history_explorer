@@ -10,7 +10,7 @@
 
 - **Engaging Community Forum**: Connect with fellow enthusiasts in an organized forum. Share insights, ask questions, and discuss landmarks in an easy-to-navigate space.
 
-## More functionalities to come!**
+## More functionalities to come!
 - Visited Landmarks
 - Nearby Landmarks
 - Related Links 

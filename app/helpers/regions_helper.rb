@@ -1,12 +1,12 @@
 module RegionsHelper
-    def region_button_color(region)
+    def region_color(region)
         case region.name.downcase
-        when "northeast" then "btn-outline-primary" # Blue
-        when "northwest" then "btn-outline-success" # Green
-        when "metro" then "btn-outline-danger"   # Red
-        when "southwest" then "btn-outline-warning"  # Yellow
-        when "southeast" then "btn-outline-secondary"  # Gray
-        when "central" then "btn-outline-info"  # Turquois
+        when "northeast" then "primary" # Blue
+        when "northwest" then "success" # Green
+        when "metro" then "danger"   # Red
+        when "southwest" then "warning"  # Yellow
+        when "southeast" then "secondary"  # Gray
+        when "central" then "info"  # Turquois
         end
       end
 end
