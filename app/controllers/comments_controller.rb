@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_landmark
-    before_action :set_comment
+    before_action :set_comment, only: [:destroy]
     before_action :verify_comment_user, only: [:destroy]
 
     def create
@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
       end
   
     def destroy
-      @comment = @landmark.comments.find(params[:id])
       @comment.destroy
       redirect_to landmark_path(@landmark), status: :see_other
     end
@@ -21,9 +20,9 @@ class CommentsController < ApplicationController
         @landmark = Landmark.find(params[:landmark_id])
       end
 
-    def set_comment
+      def set_comment
         @comment = @landmark.comments.find(params[:id])
-    end
+      end
 
       def comment_params
         params.expect(comment: [:body, :user_id, :landmark_id])
