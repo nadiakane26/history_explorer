@@ -1,22 +1,42 @@
 <% content_for :title, "Home" %>
 
 <div class="bg-light py-5 mb-4">
-  <div class="container-fluid">
-    <h1 class="display-4">Minnesota Regions</h1>
-<% if current_user&.admin? %>
-    <p>Click on a region to explore all the related landmarks or create a new one.</p>
-    <%else%>
-  <p>Click on a region to explore all the related landmarks.</p>
-<% end%>
-    <hr class="my-4">
-      <p>There are <%= Region.count %> Regions!</p>
-          <% if current_user&.admin? %>
-    <p>
-      <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
-    </p>
-    <% end%>
+  <div class="container">
+    <div class="row">
+      <!-- Text Content Column -->
+      <div class="col-md-8">
+        <h1 class="display-4">Minnesota Regions</h1>
+        <% if current_user&.admin? %>
+          <p>Click on a region to explore all the related landmarks or create a new one.</p>
+        <% else %>
+          <p>Click on a region to explore all the related landmarks.</p>
+        <% end %>
+        <hr class="my-4">
+        <p>There are <%= Region.count %> Regions!</p>
+        <% if current_user&.admin? %>
+          <p>
+            <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
+          </p>
+        <% end %>
+      </div>
+
+      <!-- Carousel Column -->
+      <div class="col-md-4">
+        <div id="region-carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% image_files = Dir.glob(Rails.root.join("app/assets/images/regions/*")) %>
+            <% image_files.each_with_index do |image_path, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <%= image_tag image_path.gsub(Rails.root.join("app/assets/images/").to_s, ""), class: "d-block h-100", alt: "Slide #{index + 1}" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 <div class="row row-cols-1 row-cols-md-2 g-4 mb-4 custom-lead">
   <% @regions.each do |region| %>
