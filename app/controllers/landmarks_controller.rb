@@ -33,6 +33,7 @@ class LandmarksController < ApplicationController
   # POST /landmarks or /landmarks.json
   def create
     @landmark = current_user.landmarks.build(landmark_params)
+    @landmark.images.attach(params[:images])
 
     respond_to do |format|
       if @landmark.save
@@ -73,7 +74,7 @@ class LandmarksController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def landmark_params
-      params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
+      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
     end
 
     def verify_landmark_user  

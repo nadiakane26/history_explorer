@@ -1,7 +1,7 @@
 <%# _like_button.html.erb %>
 
 <% if current_user %>
-<% like = current_user&likes.find_by(likeable: likeable) %>
+<% like = current_user&.likes.find_by(likeable: likeable) %>
 <% if like.nil? %>
   <!-- Like Button -->
   <%= button_to likes_path, 
