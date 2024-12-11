@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      
+
 
       ## Recoverable
       t.string   :reset_password_token
@@ -17,7 +17,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
 
       ## Rememberable
       t.datetime :remember_created_at
-      
+
       t.timestamps null: false
     end
 
