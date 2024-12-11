@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :check_admin, only: [ :new, :create, :edit, :update, :destroy ]
   # GET /regions or /regions.json
   def index
     @regions = Region.all
@@ -63,7 +63,7 @@ class RegionsController < ApplicationController
   end
 
   private
-   # Only allow a list of trusted parameters through.
+    # Only allow a list of trusted parameters through.
     def region_params
       params.expect(region: [ :name, :description, :user_id ])
     end

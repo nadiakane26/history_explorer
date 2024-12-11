@@ -1,6 +1,6 @@
 class LandmarksController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :verify_landmark_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [ :new, :create, :edit ]
+  before_action :verify_landmark_user, only: [ :edit, :update, :destroy ]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -17,7 +17,6 @@ class LandmarksController < ApplicationController
       format.html # Regular HTML request
       format.js   # JavaScript request (for AJAX)
     end
-
   end
 
   # GET /landmarks/new
@@ -49,7 +48,7 @@ class LandmarksController < ApplicationController
   # PATCH/PUT /landmarks/1 or /landmarks/1.json
   def update
     @landmark = Landmark.find(params[:id])
-    
+
     respond_to do |format|
       if @landmark.update(landmark_params)
         format.html { redirect_to @landmark, notice: "Landmark was successfully updated." }
@@ -75,17 +74,16 @@ class LandmarksController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def landmark_params
-      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
+      params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: [] ])
     end
 
-    def verify_landmark_user  
+    def verify_landmark_user
       @landmark = Landmark.find(params[:id])
       unless @landmark.user == current_user || current_user.admin?
         respond_to do |format|
             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
             format.json { render :show, status: :ok, location: @landmark }
       end
-    end
+      end
   end
-
 end

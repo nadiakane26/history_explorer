@@ -3,17 +3,16 @@ Rails.application.routes.draw do
   get "likes/destroy"
   resources :regions
   resources :landmarks do
-    resources :comments 
-    
+    resources :comments
   end
-  
+
   resources :likes
-  
+
   get "pages/nearby"
   get "pages/about"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  get 'search', to: 'pages#search'
+  get "search", to: "pages#search"
   root "regions#index"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
