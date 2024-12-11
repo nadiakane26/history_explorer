@@ -17,7 +17,7 @@
 <div class="row justify-content-between">
   <!-- Main content on the left side -->
   <div class="col-lg-8">
-    <h1><%= @landmark.name %><span class="btn <%= region_button_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
+    <h1><%= @landmark.name %><span class="btn <%= region_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
 
     <p><span class="text-muted small">
     <%= @landmark.user.username %> | <i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %>
@@ -53,7 +53,7 @@
     <p><%= @landmark.description %></p>
 
     <div class="button-container d-flex align-items-center gap-2 custom-lead">
-      <% if @landmark.user == current_user || current_user.admin? %>
+      <% if @landmark.user == current_user || current_user&.admin? %>
         <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
         <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this landmark?" } %>
       <% end %>
