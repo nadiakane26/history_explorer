@@ -28,11 +28,11 @@
     <% if @landmark.images.attached? %>
       <div class="landmark-images">
         <% @landmark.images.each do |image| %>
-          <%= link_to image_tag(image), style: "width:200px" %>
+       <%= link_to image, class: "img-link" do %>
+  <%= image_tag(image, alt: @landmark.name, class: "img-thumbnail", style: "width: 100%;") %>
+<% end %>
         <% end %>
       </div>
-    <% else %>
-      <p>No images uploaded yet.</p>
     <% end %>
 
     <p><%= @landmark.description %></p>

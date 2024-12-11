@@ -4,7 +4,7 @@
   </script>
   <%end%>
   
-<%= form_with(model: landmark, html: { class: "container mt-4" }) do |form| %>
+<%= form_with(model: landmark,  local: true, html: { class: "container mt-4" }) do |form| %>
   <% if landmark.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(landmark.errors.count, "error") %> prohibited this landmark from being saved:</h2>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="field ">
-  <%= form.label :images, "Upload Images" %>
+  <%= form.label :images, "Upload Images",  class: "form-label" %>
   <%= form.file_field :images, multiple: true, class: "form-control" %>
 </div>
 

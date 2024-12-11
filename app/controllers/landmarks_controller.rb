@@ -49,6 +49,7 @@ class LandmarksController < ApplicationController
   # PATCH/PUT /landmarks/1 or /landmarks/1.json
   def update
     @landmark = Landmark.find(params[:id])
+    
     respond_to do |format|
       if @landmark.update(landmark_params)
         format.html { redirect_to @landmark, notice: "Landmark was successfully updated." }
@@ -74,7 +75,7 @@ class LandmarksController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def landmark_params
-      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
+      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images:])
     end
 
     def verify_landmark_user  
