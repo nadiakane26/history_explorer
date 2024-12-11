@@ -1,6 +1,6 @@
 # History Explorer
 
-**History Explorer** is changing the way people explore historical landmarks—offering a user-friendly platform that makes the journey more engaging, organized, and informative.
+**History Explorer** is changing the way people explore historical landmarks—offering a user-friendly platform that makes the journey more engaging, organized, and informative. The historical content created for this project is provided by the Minnesota Historical Society, specifically from their 2024 175th Anniversary Scavenger Hunt.
 
 ## Key Features of History Explorer
 
@@ -10,7 +10,10 @@
 
 - **Engaging Community Forum**: Connect with fellow enthusiasts in an organized forum. Share insights, ask questions, and discuss landmarks in an easy-to-navigate space.
 
-> **More functionalities to come!**
+## More functionalities to come!**
+- Visited Landmarks
+- Nearby Landmarks
+- Related Links 
 
 ## Technologies Used
 

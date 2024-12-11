@@ -75,12 +75,12 @@ class LandmarksController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def landmark_params
-      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images:])
+      params.expect(landmark: [:name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: []])
     end
 
     def verify_landmark_user  
       @landmark = Landmark.find(params[:id])
-      unless @landmark.user == current_user
+      unless @landmark.user == current_user || current_user.admin?
         respond_to do |format|
             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
             format.json { render :show, status: :ok, location: @landmark }
