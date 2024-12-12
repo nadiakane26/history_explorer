@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <!-- Text Content Column -->
-      <div class="col-md-8">
+      <div class="col-md-9">
         <h1 class="display-4">Minnesota Regions</h1>
         <% if current_user&.admin? %>
           <p>Click on a region to explore all the related landmarks or create a new one.</p>
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Carousel Column -->
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div id="region-carousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <% image_files = Dir.glob(Rails.root.join("app/assets/images/regions/*")) %>

@@ -10,7 +10,7 @@ async function initMap() {
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   // The map
   map = new Map(document.getElementById("map"), {
-    zoom: 14,
+    zoom: 13,
     center: position,
     mapId: "Landmark"
   });
