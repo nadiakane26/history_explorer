@@ -41,18 +41,16 @@ display: block;
   font-size: 1rem; /* Adjust this value */
 }
 
-#landmark-carousel {
+#landmark-carousel .carousel-item {
   object-fit: cover; /* Ensures that the images cover the area without distortion */
   max-height: 550px;      /* Set a fixed height for all images */
   width: 100%;        /* Make images responsive and fill the container */
 }
 
 #region-carousel .carousel-inner .carousel-item {
-  height: 400px; /* Set a fixed height */
+  height: 300px; /* Set a fixed height */
 }
 
 #region-carousel image {
   object-fit: cover; /* Ensures the image fills the container without distortion */
-  height: 100%;      /* Fills the height of the parent container */
-  width: 100%;       /* Fills the width of the parent container */
 }
