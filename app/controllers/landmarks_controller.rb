@@ -1,7 +1,7 @@
 class LandmarksController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit ]
   before_action :verify_landmark_user, only: [ :edit, :update, :destroy ]
-  before_action :set_landmark, only: [:show]
+  before_action :set_landmark, except: [:index, :new, :create]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -81,8 +81,8 @@ class LandmarksController < ApplicationController
     end
 
     def verify_landmark_user
-
-      unless @landmark.user == current_user || current_user.admin?
+      @landmark = Landmark.friendly.find(params[:slug])
+      unless @landmark.user == current_user || current_user&.admin?
         respond_to do |format|
             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
             format.json { render :show, status: :ok, location: @landmark }
