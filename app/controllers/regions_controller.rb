@@ -1,6 +1,8 @@
 class RegionsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :check_admin, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :set_region, only: [:show]
+
   # GET /regions or /regions.json
   def index
     @regions = Region.all
@@ -8,7 +10,7 @@ class RegionsController < ApplicationController
 
   # GET /regions/1 or /regions/1.json
   def show
-    @region = Region.find(params[:id])
+    
     @landmarks = @region.landmarks
   end
 
@@ -19,7 +21,6 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
-    @region = Region.find(params[:id])
   end
 
   # POST /regions or /regions.json
@@ -39,7 +40,6 @@ class RegionsController < ApplicationController
 
   # PATCH/PUT /regions/1 or /regions/1.json
   def update
-    @region = Region.find(params[:id])
     respond_to do |format|
       if @region.update(region_params)
         format.html { redirect_to @region, notice: "Region was successfully updated." }
@@ -53,7 +53,6 @@ class RegionsController < ApplicationController
 
   # DELETE /regions/1 or /regions/1.json
   def destroy
-    @region = Region.find(params[:id])
     @region.destroy!
 
     respond_to do |format|
@@ -63,6 +62,10 @@ class RegionsController < ApplicationController
   end
 
   private
+  def set_region
+    @region = Region.friendly.find(params[:slug])
+  end
+
     # Only allow a list of trusted parameters through.
     def region_params
       params.expect(region: [ :name, :description, :user_id ])

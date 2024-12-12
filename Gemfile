@@ -70,3 +70,5 @@ gem "will_paginate", "~> 4.0"
 gem "will_paginate-bootstrap", "~> 1.0"
 
 gem "rubocop"
+
+gem "friendly_id"
