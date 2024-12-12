@@ -17,10 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         center: defaultPosition,
         mapId: "Landmark",
       });
-
-
-      // The marker
-     const marker = new AdvancedMarkerElement({
+  
+      // Initialize the marker (assigned to global `marker`)
+      marker = new AdvancedMarkerElement({
         map: map,
         position: defaultPosition,
         title: "St. Paul",
@@ -46,12 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Get existing latitude and longitude from the hidden fields
       const lat = parseFloat(document.getElementById("lat").value);
       const lng = parseFloat(document.getElementById("lng").value);
-
+  
       // If coordinates exist, update map with saved coordinates
       if (!isNaN(lat) && !isNaN(lng)) {
-        const position = { lat, lng };
-        updateMap(position.lat, position.lng);
-  
+        updateMap(lat, lng);
       }
     }
   
@@ -64,34 +61,31 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         const { lat, lng } = place.geometry.location;
         const name = place.name;
-        const address = place.formatted_address
+        const address = place.formatted_address;
   
         // Update the hidden lat/lng input fields
         document.getElementById("lat").value = lat();
         document.getElementById("lng").value = lng();
-        
         // Update the address field with the selected place's address
         document.getElementById("autocomplete").value = address;
-
         // Update the map and marker
         updateMap(lat(), lng(), name);
       }
     }
   
     // Update Map Position
-    function updateMap(lat, lng, name = "Selected Location") {
+    function updateMap(lat, lng, name = document.getElementById("name").value) {
       const position = { lat, lng };
   
       // Pan map to new position
       map.setCenter(position);
   
       // Update marker position
-      marker.position(position);
-      marker.title(name); // Use the name of the place for the marker's title
+      marker.position = position; 
+      marker.title = name;       
     }
   
     // Initialize the map and autocomplete
     initMap();
-    initAutocomplete();
   });
   
