@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   get "likes/create"
   get "likes/destroy"
-  resources :regions
-  resources :landmarks do
-    resources :comments
-  end
+  resources :regions, param: :slug 
+resources :landmarks, param: :slug do
+  resources :comments
+end
 
   resources :likes
 

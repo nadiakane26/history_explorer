@@ -1,6 +1,7 @@
 class LandmarksController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit ]
   before_action :verify_landmark_user, only: [ :edit, :update, :destroy ]
+  before_action :set_landmark, only: [:show]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -10,7 +11,7 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks/1 or /landmarks/1.json
   def show
-    @landmark = Landmark.find(params[:id])
+    
     @comments = @landmark.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 6)
 
     respond_to do |format|
@@ -26,7 +27,6 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks/1/edit
   def edit
-    @landmark = Landmark.find(params[:id])
   end
 
   # POST /landmarks or /landmarks.json
@@ -47,7 +47,6 @@ class LandmarksController < ApplicationController
 
   # PATCH/PUT /landmarks/1 or /landmarks/1.json
   def update
-    @landmark = Landmark.find(params[:id])
 
     respond_to do |format|
       if @landmark.update(landmark_params)
@@ -62,7 +61,6 @@ class LandmarksController < ApplicationController
 
   # DELETE /landmarks/1 or /landmarks/1.json
   def destroy
-    @landmark = Landmark.find(params[:id])
     @landmark.destroy!
 
     respond_to do |format|
@@ -72,13 +70,18 @@ class LandmarksController < ApplicationController
   end
 
   private
+
+  def set_landmark
+    @landmark = Landmark.friendly.find(params[:slug])
+  end
+
     # Only allow a list of trusted parameters through.
     def landmark_params
       params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: [] ])
     end
 
     def verify_landmark_user
-      @landmark = Landmark.find(params[:id])
+
       unless @landmark.user == current_user || current_user.admin?
         respond_to do |format|
             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
