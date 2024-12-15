@@ -25,6 +25,7 @@
           </ul>
         </li>
           <%= link_to "Nearby Landmarks", pages_nearby_path, class: "nav-link #{'active' if current_page?(pages_nearby_path)}" %>
+          <%= link_to "My Landmarks", my_landmarks_path, class: "nav-link #{'active' if current_page?(my_landmarks_path)}" %>
         </ul>
         <%= form_with(url: search_path, method: :get, local: true, class: "d-flex") do |form| %>
           <%= form.text_field :search, class: "form-control me-2", placeholder: "Search landmarks and regions", aria: { label: "Search" },style: "width: 250px;" %>
