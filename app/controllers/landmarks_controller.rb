@@ -1,7 +1,7 @@
 class LandmarksController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit ]
   before_action :verify_landmark_user, only: [ :edit, :update, :destroy ]
-  before_action :set_landmark, except: [:index, :new, :create]
+  before_action :set_landmark, except: [ :index, :new, :create ]
 
   # GET /landmarks or /landmarks.json
   def index
@@ -11,7 +11,6 @@ class LandmarksController < ApplicationController
 
   # GET /landmarks/1 or /landmarks/1.json
   def show
-    
     @comments = @landmark.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 6)
 
     respond_to do |format|
@@ -47,7 +46,6 @@ class LandmarksController < ApplicationController
 
   # PATCH/PUT /landmarks/1 or /landmarks/1.json
   def update
-
     respond_to do |format|
       if @landmark.update(landmark_params)
         format.html { redirect_to @landmark, notice: "Landmark was successfully updated." }

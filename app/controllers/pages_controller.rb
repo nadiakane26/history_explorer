@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!, only: [ :my_landmarks ]
+
     def index
     end
 
@@ -6,6 +8,10 @@ class PagesController < ApplicationController
     end
 
     def about
+    end
+
+    def my_landmarks
+      @landmarks = current_user.landmarks
     end
 
     def search

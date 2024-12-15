@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize and add the map
   async function initMap() {
-    console.log(landmark); 
     // Define the position of the landmark
     const position = { lat: landmark.lat, lng: landmark.lng };
 

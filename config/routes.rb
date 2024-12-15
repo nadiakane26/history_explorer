@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "likes/create"
   get "likes/destroy"
-  resources :regions, param: :slug 
+  resources :regions, param: :slug
 resources :landmarks, param: :slug do
   resources :comments
 end
@@ -9,6 +9,9 @@ end
   resources :likes
 
   get "pages/nearby"
+  get "pages/my_landmarks", to: "pages#my_landmarks", as: "my_landmarks"
+
+
   get "pages/about"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
