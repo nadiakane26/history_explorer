@@ -14,11 +14,11 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   def admin?
-    roles.exists?(name: "admin")
+    role && role.name == "admin"
   end
-
+  
   def user?
-    roles.exists?(name: "user")
+    role && role.name == "user"
   end
 
   after_create :assign_default_role
