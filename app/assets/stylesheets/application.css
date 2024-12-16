@@ -54,3 +54,21 @@ display: block;
 #region-carousel image {
   object-fit: cover; /* Ensures the image fills the container without distortion */
 }
+
+.btn-pink {
+  background-color: #ff66b2; /* Pink color */
+  color: white;
+  border: none; /* Remove default button border */
+  border-radius: 0.25rem; /* Optional: Add some border-radius for rounded corners */
+  transition: background-color 0.2s ease; /* Smooth transition for hover effect */
+}
+
+.btn-pink:hover {
+  background-color: #ff3385; /* Darker pink for hover effect */
+  color: white;
+}
+
+.btn-pink:focus, .btn-pink:active {
+  outline: none; /* Remove focus outline if needed */
+  background-color: #ff3385; /* Keep the hover color active */
+}
