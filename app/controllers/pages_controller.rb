@@ -12,6 +12,7 @@ class PagesController < ApplicationController
 
     def my_landmarks
       @landmarks = current_user.landmarks
+      @liked_landmarks = current_user.likes.map(&:likeable).select { |likeable| likeable.is_a?(Landmark) }
     end
 
     def search

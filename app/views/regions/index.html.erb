@@ -12,7 +12,7 @@
           <p>Click on a region to explore all the related landmarks.</p>
         <% end %>
         <hr class="my-4">
-        <p>There are <%= Region.count %> Regions!</p>
+        <p>There are <%= Region.count %> regions, each represented by a unique color!</p>
         <% if current_user&.admin? %>
           <p>
             <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
