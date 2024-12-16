@@ -5,7 +5,7 @@
       <h1 class="display-4">Landmarks</h1>
       <p>Click on an landmark to read more of its history or create a new one.</p>
       <hr class="my-4">
-      <p>There are <%= pluralize(Landmark.count) %> landmarks!</p>
+     <p>There are <%= pluralize(Landmark.count, 'landmark') %>!</p>
       <p>
         <%= link_to "Create a New Landmark", new_landmark_path, class: "btn btn-dark btn-lg" %>
       </p>
