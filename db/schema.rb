@@ -134,8 +134,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_12_181258) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "landmarks"
   add_foreign_key "comments", "users"
-  add_foreign_key "favorites", "landmarks"
-  add_foreign_key "favorites", "users"
   add_foreign_key "landmarks", "regions"
   add_foreign_key "landmarks", "users"
   add_foreign_key "likes", "users"
