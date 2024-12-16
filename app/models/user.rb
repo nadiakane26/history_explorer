@@ -27,6 +27,7 @@ class User < ApplicationRecord
 
   def assign_default_role
     # If the user doesn't already have a role, assign the default 'user' role
-    self.roles << Role.find_by(name: "user") if roles.empty?
+    user_role = Role.find_or_create_by(name: "user")
+    self.roles << user_role if roles.empty?
   end
 end
