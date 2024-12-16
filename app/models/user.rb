@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
 
-  belongs_to :roles
+  belongs_to :role
   validates :first_name, :last_name, presence: true
   validates :username, presence: true, uniqueness: true
 
