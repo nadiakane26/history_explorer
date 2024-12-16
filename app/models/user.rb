@@ -9,16 +9,17 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
 
-  belongs_to :role
+  has_and_belongs_to_many :roles
+
   validates :first_name, :last_name, presence: true
   validates :username, presence: true, uniqueness: true
 
   def admin?
-    role && role.name == "admin"
+    roles.exists?(name: "admin")
   end
 
   def user?
-    role && role.name == "user"
+    roles.exists?(name: "user")
   end
 
   after_create :assign_default_role
