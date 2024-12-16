@@ -37,6 +37,10 @@
   <% end %>
 </div>
 
+<% if @landmarks.empty? %>
+  <p>You haven't posted any landmarks yet.</p>
+<% end %>
+
 <h2>My Favorite Landmarks:</h2>
 <div class="row">
   <% @liked_landmarks.each do |landmark| %>
