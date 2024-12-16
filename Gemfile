@@ -72,3 +72,5 @@ gem "will_paginate-bootstrap", "~> 1.0"
 gem "rubocop"
 
 gem "friendly_id"
+
+ruby '3.3.5'
