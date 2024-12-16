@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def admin?
     role && role.name == "admin"
   end
-  
+
   def user?
     role && role.name == "user"
   end

@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     private
 
     def set_landmark
-        @landmark = Landmark.find(params[:landmark_id])
+        @landmark = Landmark.friendly.find(params[:landmark_slug])
       end
 
       def set_comment
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
       end
 
       def comment_params
-        params.expect(comment: [ :body, :user_id, :landmark_id ])
+        params.expect(comment: [ :body ])
       end
 
       def verify_comment_user
