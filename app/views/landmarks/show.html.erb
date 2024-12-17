@@ -19,7 +19,7 @@
 <div class="row justify-content-between">
   <!-- Main content on the left side -->
   <div class="col-lg-8">
-    <h1><%= @landmark.name %><span class="btn <%= region_color(@landmark.region)  %> btn-sm disabled mx-2"><%= @landmark.region.name %></span></h1>
+    <h1><%= @landmark.name %> <span class="btn btn-outline-<%= region_color(@landmark.region) %> btn-sm disabled"><%= @landmark.region.name %></span></h1>
 
     <p><span class="text-muted small">
     <%= @landmark.user.username %> | <i class="fa-regular fa-calendar ms-2"></i> <%= @landmark.created_at.strftime("%B %d, %Y") %>
