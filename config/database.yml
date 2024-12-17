@@ -82,8 +82,6 @@ production:
   primary: &primary_production
     <<: *default
     database: <%= ENV['DATABASE_URL'] %>
-    username: history_explorer
-    password: <%= ENV["HISTORY_EXPLORER_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: history_explorer_production_cache
