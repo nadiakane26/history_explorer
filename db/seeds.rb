@@ -16,7 +16,7 @@ Landmark.find_each do |landmark|
   12.times do |i|
     user = users[i % 3] # Cycles through users with IDs 1, 2, 3
     landmark.comments.create!(
-      user: user.sample,
+      user: users.sample,
       body: Faker::Quote.famous_last_words
     )
   end
