@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-user_ids = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+users = User.all
 
 landmark_data = [
   {
@@ -99,7 +99,7 @@ landmark_data.each do |landmark|
   # If the region exists, create the landmark and associate it with the region
   if region
     # Find a random user to assign this landmark to
-    user = User.find(user_ids[index % user_ids.length]) 
+    user = users.sample
     
     # Create the landmark for the user
     user.landmarks.create!(
