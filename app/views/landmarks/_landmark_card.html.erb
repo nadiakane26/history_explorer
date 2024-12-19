@@ -1,0 +1,47 @@
+<div class="col-md-4 mb-4">
+  <div class="card d-flex flex-column h-100 landmark-card">
+    <div class="card-body d-flex flex-column">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <span class="btn btn-outline-<%= region_color(landmark.region) %> btn-sm disabled">
+            <%= landmark.region.name %>
+          </span>
+
+          <% if user_signed_in? %>
+          <!-- Like/Unlike Button (Heart) -->
+          <%= button_to (current_user && current_user.likes.exists?(likeable: landmark)) ? like_path(current_user.likes.find_by(likeable: landmark)) : likes_path, 
+                        params: (current_user && current_user.likes.exists?(likeable: landmark) ? {} : { like: { likeable_id: landmark.id, likeable_type: 'Landmark' } }),
+                        method: (current_user && current_user.likes.exists?(likeable: landmark) ? :delete : :post), 
+                        class: "btn btn-link p-0 ms-2" do %>
+            <i class="fa-<%= current_user && current_user.likes.exists?(likeable: landmark) ? 'solid' : 'regular' %> fa-heart text-danger"></i>
+          <% end %>
+          <% end %>
+        </div>
+
+        <!-- Save/Unsave Button (Bookmark) on the Right -->
+        <%= button_to (current_user && current_user.saved_landmarks.include?(landmark)) ? landmark_safe_path(landmark_slug: landmark.slug, id: current_user.saves.find_by(landmark: landmark).id) : landmark_saves_path(landmark_slug: landmark.slug),
+                      method: (current_user && current_user.saved_landmarks.include?(landmark) ? :delete : :post),
+                      class: "btn btn-link p-0 ms-2" do %>
+          <i class="fa-<%= current_user && current_user.saved_landmarks.include?(landmark) ? 'solid' : 'regular' %> fa-bookmark text-primary"></i>
+        <% end %>
+      </div>
+
+      <!-- Landmark Name (Title) -->
+      <h5 class="card-title">
+        <%= content_tag :span, landmark.name, class: "text-decoration-none" %>    
+      </h5>
+
+      <!-- Landmark Author and Date -->
+      <p class="card-text text-muted custom-lead">
+        <span>
+          <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.strftime("%B %d, %Y") %> 
+        </span>
+      </p>
+
+      <!-- Read More Button Positioned at the Bottom -->
+      <div class="mt-auto">
+        <%= link_to "Read More", landmark_path(landmark), class: "btn btn-light btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

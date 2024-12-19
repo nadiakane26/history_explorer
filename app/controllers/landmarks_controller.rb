@@ -7,6 +7,7 @@ class LandmarksController < ApplicationController
   def index
     @landmarks = Landmark.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
     @user_likes = current_user.likes.where(likeable_type: 'Landmark').pluck(:likeable_id) if current_user
+    @saved_landmarks = current_user&.saved_landmarks || []
   end
 
 
