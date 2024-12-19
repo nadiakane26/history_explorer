@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
 
-  has_many :saves, dependent: :destroy, class_name: 'Save'
+  has_many :saves, dependent: :destroy, class_name: "Save"
   has_many :saved_landmarks, through: :saves, source: :landmark
 
   has_and_belongs_to_many :roles

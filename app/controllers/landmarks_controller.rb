@@ -6,13 +6,14 @@ class LandmarksController < ApplicationController
   # GET /landmarks or /landmarks.json
   def index
     @landmarks = Landmark.order(created_at: :desc).paginate(page: params[:page], per_page: 9)
-    @user_likes = current_user.likes.where(likeable_type: 'Landmark').pluck(:likeable_id) if current_user
+    @user_likes = current_user.likes.where(likeable_type: "Landmark").pluck(:likeable_id) if current_user
     @saved_landmarks = current_user&.saved_landmarks || []
   end
 
 
   # GET /landmarks/1 or /landmarks/1.json
   def show
+    @saved_landmarks = current_user&.saved_landmarks || []
     @comments = @landmark.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 6)
 
     respond_to do |format|

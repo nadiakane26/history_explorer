@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :regions, param: :slug
 resources :landmarks, param: :slug do
   resources :comments
-  resources :saves, only: [:create, :destroy]
+  resources :saves, only: [ :create, :destroy ]
 end
 
   resources :likes
