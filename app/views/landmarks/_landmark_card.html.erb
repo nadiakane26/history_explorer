@@ -8,27 +8,33 @@
           </span>
 
           <% if user_signed_in? %>
-            <!-- Like/Unlike Button (Heart) -->
-            <%= button_to (current_user && current_user.likes.exists?(likeable: landmark)) ? like_path(current_user.likes.find_by(likeable: landmark)) : likes_path, 
-                          params: (current_user && current_user.likes.exists?(likeable: landmark) ? {} : { like: { likeable_id: landmark.id, likeable_type: 'Landmark' } }),
-                          method: (current_user && current_user.likes.exists?(likeable: landmark) ? :delete : :post), 
-                          class: "btn btn-link p-0 ms-2" do %>
-              <i class="fa-<%= current_user && current_user.likes.exists?(likeable: landmark) ? 'solid' : 'regular' %> fa-heart text-danger"></i>
-            <% end %>
+          <!-- Like Button -->
+          <% liked = current_user.likes.exists?(likeable: landmark) %>
+          <%= button_to liked ? like_path(current_user.likes.find_by(likeable: landmark)) : likes_path,
+                        params: liked ? {} : { like: { likeable_id: landmark.id, likeable_type: 'Landmark' } },
+                        method: liked ? :delete : :post,
+                        class: "btn btn-link p-0 ms-2",
+                        aria: { label: liked ? "Unlike this landmark" : "Like this landmark" } do %>
+            <i class="fa-<%= liked ? 'solid' : 'regular' %> fa-heart text-danger"></i>
           <% end %>
+        <% end %>
         </div>
 
         <% if user_signed_in? %>
-          <!-- Save/Unsave Button (Bookmark) on the Right -->
-          <%= button_to (current_user && current_user.saved_landmarks.include?(landmark)) ? landmark_safe_path(landmark_slug: landmark.slug, id: current_user.saves.find_by(landmark: landmark).id) : landmark_saves_path(landmark_slug: landmark.slug),
-                        method: (current_user && current_user.saved_landmarks.include?(landmark) ? :delete : :post),
-                        class: "btn btn-link p-0 ms-2" do %>
-            <i class="fa-<%= current_user && current_user.saved_landmarks.include?(landmark) ? 'solid' : 'regular' %> fa-bookmark text-primary"></i>
+          <!-- Bookmark Button -->
+          <% saved = current_user.saved_landmarks.include?(landmark) %>
+          <%= button_to saved ? 
+                        landmark_safe_path(landmark_slug: landmark.slug, id: current_user.saves.find_by(landmark: landmark).id) : 
+                        landmark_saves_path(landmark_slug: landmark.slug),
+                        method: saved ? :delete : :post,
+                        class: "btn btn-link p-0 ms-2",
+                        aria: { label: saved ? "Unsave this landmark" : "Save this landmark" } do %>
+            <i class="fa-<%= saved ? 'solid' : 'regular' %> fa-bookmark text-primary"></i>
           <% end %>
         <% end %>
       </div>
 
-      <!-- Landmark Name (Title) -->
+      <!-- Landmark Name-->
       <h5 class="card-title">
         <%= content_tag :span, landmark.name, class: "text-decoration-none" %>    
       </h5>
@@ -40,7 +46,7 @@
         </span>
       </p>
 
-      <!-- Read More Button Positioned at the Bottom -->
+      <!-- Read More Button-->
       <div class="mt-auto">
         <%= link_to "Read More", landmark_path(landmark), class: "btn btn-light btn-sm" %>
       </div>

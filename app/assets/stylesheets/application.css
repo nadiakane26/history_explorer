@@ -8,6 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ /* Navigation Bar */
  .navbar-brand {
     font-family: 'Brush Script MT', cursive; 
     font-size: 2.5rem !important; 
@@ -26,25 +28,27 @@ top: -7px;
 display: block;
 }
 
+ /* Embedded Map */
 #map {
   width: 95%;
   height: 400px;
   margin: 20px;
 }
 
+ /* Comments */
 #comments-container {
   margin-top: 100px; }
 
-
+ /* Font */
 .custom-lead {
-  @extend .lead; /* If using SCSS */
-  font-size: 1rem; /* Adjust this value */
+  font-size: 1rem;
 }
 
+ /* Landmark Images */ 
 #landmark-carousel .carousel-item {
   position: relative;    /* Ensures that the child images can be positioned */
   width: 100%;           /* Make the carousel take the full width of its parent container */
-  height: 500px;         /* Set a fixed height for the carousel container */
+  height: 500px;         /* Fixed height for the carousel container */
   overflow: hidden;      /* Hide any overflow if the image exceeds the container */
 }
 
@@ -56,6 +60,7 @@ display: block;
   object-position: center; /* Center the image within the container */
 }
 
+ /* Region Images */ 
 #region-carousel .carousel-inner .carousel-item {
   height: 300px; /* Set a fixed height */
 }

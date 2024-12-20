@@ -27,6 +27,8 @@
 
       <% if user_signed_in? %>
         <!-- Save/Unsave Button (Bookmark) -->
+        <!--If the landmark is saved, delete it using landmark's slug and id of the save record-->
+        <!--If the landmark is not saved, save it-->
         <%= button_to (current_user && current_user.saved_landmarks.include?(@landmark)) ? 
                       landmark_safe_path(landmark_slug: @landmark.slug, id: current_user.saves.find_by(landmark: @landmark).id) : 
                       landmark_saves_path(landmark_slug: @landmark.slug),

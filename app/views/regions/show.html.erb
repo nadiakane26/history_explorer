@@ -17,7 +17,7 @@
                     <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.in_time_zone('Central Time (US & Canada)').strftime("%B %d, %Y") %> 
                   </span>
                 </p>
-              <!-- Read more button positioned at the bottom -->
+              <!-- Read more button-->
               <div class="mt-auto">
                 <%= link_to "Read More", landmark_path(landmark), class: "btn btn-light btn-sm" %>
               </div>

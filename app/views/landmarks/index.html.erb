@@ -18,7 +18,7 @@
     <% end %>
   </div>
 
-  <nav aria-label="Page navigation example">
+  <nav aria-label="Pagination">
     <ul class="pagination">
       <li class="page-item <%= 'disabled' if @landmarks.previous_page.nil? %>">
         <%= link_to 'Previous', landmarks_path(page: @landmarks.previous_page), class: 'page-link' %>
