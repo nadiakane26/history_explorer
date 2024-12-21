@@ -5,7 +5,7 @@
     <i class="fas fa-clock fa-xs text-muted"></i>
     <!-- Display comment creation time -->
     <small class="text-muted ml-1">
-    <%= comment.created_at.strftime("%b %d, %Y %I:%M %p")%>
+    <%= comment.updated_at.strftime("%b %d, %Y %I:%M %p")%>
     </small>
     
     <p class="card-text">
@@ -16,6 +16,7 @@
       <!-- Delete Button -->
        <% if current_user == comment.user || current_user&.admin? %>
       <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <%= link_to "Edit", edit_landmark_comment_path(@landmark, comment), class: "btn btn-warning btn-sm" %>
       <% end %>
       <!-- Like/Unlike Button -->
       <%= render 'likes/like_button', likeable: comment %>

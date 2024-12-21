@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "likes/destroy"
   resources :regions, param: :slug
 resources :landmarks, param: :slug do
-  resources :comments
+  resources :comments, only: [:create, :edit, :update, :destroy]
   resources :saves, only: [ :create, :destroy ]
 end
 

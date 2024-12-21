@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_landmark
-    before_action :set_comment, only: [ :destroy ]
+    before_action :set_comment, only: [:edit, :update, :destroy]
     before_action :verify_comment_user, only: [ :destroy ]
 
     def create
@@ -11,8 +11,21 @@ class CommentsController < ApplicationController
 
     def destroy
       @comment.destroy
-      redirect_to landmark_path(@landmark), status: :see_other
+      redirect_to landmark_path(@landmark), status: :see_other, notice: "Comment deleted successfully."
     end
+
+    def edit
+        # Renders an edit form (handled in the view)
+      end
+    
+      def update
+        if @comment.update(comment_params)
+          redirect_to landmark_path(@landmark), notice: "Comment updated successfully."
+        else
+          render :edit, status: :unprocessable_entity
+        end
+      end
+
 
     private
 
