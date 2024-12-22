@@ -1,4 +1,3 @@
-// https://developers.google.com/maps/documentation/javascript/nearby-search
 let map;
 let autocomplete;
 let infoWindow;
@@ -45,14 +44,12 @@ async function initMap() {
 }
 
 async function nearbySearch(center) {
-  const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary(
-    "places"
-  );
+  const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary("places");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   // Create the request object
   const request = {
-    fields: ["displayName", "location", "businessStatus"],
+    fields: ["displayName", "location"],
     locationRestriction: {
       center: center,
       radius: 2000,
@@ -68,9 +65,11 @@ async function nearbySearch(center) {
   //@ts-ignore
   const { places } = await Place.searchNearby(request);
 
-  if (places.length) {
-    //console.log(places);
+  // Get the landmarks list container
+  const landmarkList = document.getElementById("landmarks");
+  landmarkList.innerHTML = ""; // Clear previous results
 
+  if (places.length) {
     const { LatLngBounds } = await google.maps.importLibrary("core");
     const bounds = new LatLngBounds();
 
@@ -97,11 +96,25 @@ async function nearbySearch(center) {
         infoWindow.setContent(`<div><strong>${place.displayName}</strong></div>`);
         infoWindow.open(map, marker);
       });
+
+      // Add the landmark to the list
+      const listItem = document.createElement("li");
+      listItem.textContent = place.displayName;
+      listItem.className = "list-group-item-action";
+      landmarkList.appendChild(listItem);
+
+      // Add a click listener to the list item to focus the marker
+      listItem.addEventListener("click", () => {
+        map.setCenter(place.location);
+        map.setZoom(15);
+        infoWindow.setContent(`<div><strong>${place.displayName}</strong></div>`);
+        infoWindow.open(map, marker);
+      });
     });
 
     map.fitBounds(bounds);
   } else {
-    // console.log("No results found.");
+    landmarkList.innerHTML = "<li class='list-group-item-action'>No results found.</li>";
   }
 }
 

@@ -68,15 +68,3 @@ display: block;
 #region-carousel image {
   object-fit: cover; /* Ensures the image fills the container without distortion */
 }
-#search-box {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  width: 300px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
