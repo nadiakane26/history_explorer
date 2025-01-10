@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
         end
       end
 
+      include Votable
 
     private
 

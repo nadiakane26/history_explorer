@@ -1,32 +1,25 @@
 <% if current_user %>
-<% like = current_user&.likes.find_by(likeable: likeable) %>
-<% if like.nil? %>
-  <!-- Like Button -->
-  <%= button_to likes_path, 
-                params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, 
-                method: :post, 
-                class: "btn btn-primary btn-sm" do %>
-    Like <i class="fa-regular fa-thumbs-up"></i>
+  <% if likeable.voted_up_by?(current_user) %>
+    <!-- Unlike Button -->
+    <%= button_to unlike_path(likeable), 
+                  method: :put, 
+                  class: "btn btn-primary btn-sm" do %>
+      Unlike <i class="fa-regular fa-thumbs-down"></i>
+    <% end %>
+  <% else %>
+    <!-- Like Button -->
+    <%= button_to like_path(likeable), 
+                  method: :put, 
+                  class: "btn btn-primary btn-sm" do %>
+      Like <i class="fa-regular fa-thumbs-up"></i>
+    <% end %>
   <% end %>
 <% else %>
-  <!-- Unlike Button -->
-  <%= button_to like_path(like), 
-                method: :delete, 
-                class: "btn btn-primary btn-sm" do %>
-    Unlike <i class
-    ="fa-regular fa-thumbs-down"></i>
-  <% end %>
-<% end %>
-<% else %>
-  <!-- Like button for users not signed in -->
-  <%= button_to likes_path, 
-                params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, 
-                method: :post, 
-                class: "btn btn-primary btn-sm" do %>
-    Like <i class="fa-regular fa-thumbs-up"></i>
-  <% end %>
-  
+  <!-- Message or Link for Not Logged In Users -->
+  <a href="<%= new_user_session_path %>" class="btn btn-primary btn-sm">
+    Log in to Like <i class="fa-regular fa-thumbs-up"></i>
+  </a>
 <% end %>
 
-<!-- Display like count-->
-<%= pluralize(likeable.likes.count, "Like") %>
+<!-- Display like count -->
+<%= pluralize(likeable.get_upvotes.size, "Like") %>

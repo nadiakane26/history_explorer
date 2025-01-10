@@ -1,13 +1,29 @@
 Rails.application.routes.draw do
-  get "likes/create"
-  get "likes/destroy"
-  resources :regions, param: :slug
+
+resources :regions, param: :slug
+# Landmarks routes
 resources :landmarks, param: :slug do
-  resources :comments, only: [ :create, :edit, :update, :destroy ]
+  # Voting actions for landmarks
+  member do
+    put 'like', to: 'landmarks#like'
+    put 'unlike', to: 'landmarks#unlike'
+  end
+
+  # Nesting comments under landmarks
+  resources :comments, only: [:create, :edit, :update, :destroy] do
+    member do
+      put 'like', to: 'comments#like'
+      put 'unlike', to: 'comments#unlike'
+    end
+  end
   resources :saves, only: [ :create, :destroy ]
 end
 
-  resources :likes
+
+  
+  
+
+
 
   get "pages/nearby"
   get "pages/my_landmarks", to: "pages#my_landmarks", as: "my_landmarks"

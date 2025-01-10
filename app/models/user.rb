@@ -7,8 +7,7 @@ class User < ApplicationRecord
   has_many :landmarks, dependent: :destroy
   has_many :regions, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :likes
-
+  acts_as_voter
   has_many :saves, dependent: :destroy, class_name: "Save"
   has_many :saved_landmarks, through: :saves, source: :landmark
 
