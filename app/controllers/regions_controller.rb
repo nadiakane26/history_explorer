@@ -1,6 +1,8 @@
 class RegionsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_region, except: [ :index, :new, :create ]
+  before_action :authorize_manage, except: [ :index, :show ]
+
 
   # GET /regions or /regions.json
   def index
@@ -62,6 +64,11 @@ class RegionsController < ApplicationController
   private
   def set_region
     @region = Region.friendly.find(params[:slug])
+  end
+
+  def authorize_manage
+    # Permission to manage regions
+    authorize! :manage, Region  # This checks :create, :update, :destroy, :new, :edit
   end
 
     # Only allow a list of trusted parameters through.
