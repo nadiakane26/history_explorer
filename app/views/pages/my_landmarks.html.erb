@@ -15,14 +15,14 @@
 <!-- My Favorite Landmarks -->
 <h2>My Favorite Landmarks:</h2>
 <div class="row">
-  <% @liked_landmarks.each do |landmark| %>
-    <%= render partial: 'landmarks/landmark_card', locals: { landmark: landmark } %>
+  <% if @liked_landmarks.present? %>
+    <% @liked_landmarks.each do |landmark| %>
+      <%= render partial: 'landmarks/landmark_card', locals: { landmark: landmark } %>
+    <% end %>
+  <% else %>
+    <p>You haven't liked any landmarks yet.</p>
   <% end %>
 </div>
-
-<% if @liked_landmarks.empty? %>
-  <p>You haven't liked any landmarks yet.</p>
-<% end %>
 
 <!-- My Saved Landmarks -->
 <h2>My Saved Landmarks:</h2>

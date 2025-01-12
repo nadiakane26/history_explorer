@@ -85,7 +85,7 @@ class LandmarksController < ApplicationController
 
     def verify_landmark_user
       @landmark = Landmark.friendly.find(params[:slug])
-      unless @landmark.user == current_user || current_user&.admin?
+      unless @landmark.user == current_user ||
         respond_to do |format|
             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
             format.json { render :show, status: :ok, location: @landmark }

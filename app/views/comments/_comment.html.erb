@@ -14,7 +14,7 @@
 
       <div class="button-container d-flex align-items-center gap-2">
       <!-- Delete Button -->
-       <% if current_user == comment.user || current_user&.admin? %>
+       <% if current_user == comment.user || current_user %>
       <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
       <%= link_to "Edit", edit_landmark_comment_path(@landmark, comment), class: "btn btn-warning btn-sm" %>
       <% end %>

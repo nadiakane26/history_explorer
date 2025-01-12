@@ -42,9 +42,5 @@ class CommentsController < ApplicationController
         params.expect(comment: [ :body ])
       end
 
-      def verify_comment_user
-        unless @comment.user == current_user || current_user.admin?
-            redirect_to landmark_path(@landmark), alert: "You are not authorized to modify this comment."
-        end
-    end
+  
 end

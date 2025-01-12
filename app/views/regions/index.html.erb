@@ -6,18 +6,13 @@
       <!-- Text Content Column -->
       <div class="col-md-9">
         <h1 class="display-4">Minnesota Regions</h1>
-        <% if current_user&.admin? %>
           <p>Click on a region to explore all the related landmarks or create a new one.</p>
-        <% else %>
-          <p>Click on a region to explore all the related landmarks.</p>
-        <% end %>
         <hr class="my-4">
         <p>There are <%= Region.count %> regions, each represented by a unique color!</p>
-        <% if current_user&.admin? %>
+      
           <p>
             <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
           </p>
-        <% end %>
       </div>
 
       <!-- Carousel Column -->

@@ -8,15 +8,15 @@
           </span>
 
           <% if user_signed_in? %>
-            <!-- Like/Unlike Button -->
-            <% liked = landmark.voted_up_by?(current_user) %>
-            <%= button_to liked ? unlike_landmark_path(landmark) : like_landmark_path(landmark),
-                          method: :put,
-                          class: "btn btn-link p-0 ms-2",
-                          aria: { label: liked ? "Unlike this landmark" : "Like this landmark" } do %>
-              <i class="fa-<%= liked ? 'solid' : 'regular' %> fa-heart text-danger"></i>
-            <% end %>
+          <!-- Like/Unlike Button -->
+          <% liked = landmark.voted_up_by?(current_user) %>
+          <%= button_to liked ? unlike_landmark_path(landmark) : like_landmark_path(landmark),
+                        method: :put,
+                        class: "btn btn-link p-0 ms-2",
+                        aria: { label: liked ? "Unlike this landmark" : "Like this landmark" } do %>
+            <i class="fa-<%= liked ? 'solid' : 'regular' %> fa-heart text-danger"></i>
           <% end %>
+        <% end %>
         </div>
 
         <% if user_signed_in? %>

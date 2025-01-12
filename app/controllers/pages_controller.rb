@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
     def my_landmarks
       @landmarks = current_user.landmarks
-      @liked_landmarks = Landmark.where(id: current_user.likes.where(likeable_type: "Landmark").pluck(:likeable_id))
+      @liked_landmarks = Landmark.find(ActsAsVotable::Vote.where(voter: current_user, votable_type: 'Landmark').pluck(:votable_id))
       @saved_landmarks = current_user.saved_landmarks
     end
 
