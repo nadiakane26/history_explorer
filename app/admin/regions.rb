@@ -3,8 +3,6 @@ ActiveAdmin.register Region do
 
     # Controller block to check CanCanCan permissions
     controller do
-      # Ensure the user has the correct permissions before allowing them to access Region
-      before_action :load_and_authorize_resource
   
       # Custom resource finding based on slug
       def find_resource
