@@ -11,11 +11,18 @@ class User < ApplicationRecord
   has_many :saves, dependent: :destroy, class_name: "Save"
   has_many :saved_landmarks, through: :saves, source: :landmark
 
-  has_and_belongs_to_many :roles
 
   validates :first_name, :last_name, presence: true
   validates :username, presence: true, uniqueness: true
 
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email", "encrypted_password", "first_name", "id", "id_value", "last_name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at", "username", "admin"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["comments", "landmarks", "regions", "saved_landmarks", "saves", "votes"]
+  end
 
   private
 
