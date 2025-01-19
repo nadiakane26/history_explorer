@@ -1,71 +1,67 @@
 <nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-      <%= link_to "History Explorer", root_path, class: "navbar-brand #{'active' if current_page?(root_path)}" %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <div class="container-fluid">
+    <%= link_to "History Explorer", root_path, class: "navbar-brand #{'active' if current_page?(root_path)}" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <%= link_to "About", pages_about_path, class: "nav-link #{'active' if current_page?(pages_about_path)}" %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Browse
           </a>
           <ul class="dropdown-menu">
-       <li class="dropend">
-      <%= link_to "Regions", regions_path, class: "dropdown-item dropdown-toggle" %>
-      <ul class="dropdown-menu dropdown-submenu ">
-        <% Region.all.each do |region| %>
-          <li><%= link_to region.name, region_path(region), class: "dropdown-item" %></li>
-        <% end %>
-      </ul>
-    </li>
+            <li class="dropend">
+              <%= link_to "Regions", regions_path, class: "dropdown-item dropdown-toggle" %>
+              <ul class="dropdown-menu dropdown-submenu ">
+                <% Region.all.each do |region| %>
+                  <li><%= link_to region.name, region_path(region), class: "dropdown-item" %></li>
+                <% end %>
+              </ul>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li><%= link_to "Landmarks", landmarks_path, class: "dropdown-item" %></li>
           </ul>
         </li>
-          <%= link_to "Nearby Landmarks", pages_nearby_path, class: "nav-link #{'active' if current_page?(pages_nearby_path)}" %>
-          <%= link_to "My Landmarks", my_landmarks_path, class: "nav-link #{'active' if current_page?(my_landmarks_path)}" %>
-        </ul>
-        <%= form_with(url: search_path, method: :get, local: true, class: "d-flex") do |form| %>
-          <%= form.text_field :search, class: "form-control me-2", placeholder: "Search landmarks and regions", aria: { label: "Search" },style: "width: 250px;" %>
-          <button type="submit" class="btn btn-outline-success">
+        <%= link_to "Nearby Landmarks", pages_nearby_path, class: "nav-link #{'active' if current_page?(pages_nearby_path)}" %>
+        <%= link_to "My Landmarks", my_landmarks_path, class: "nav-link #{'active' if current_page?(my_landmarks_path)}" %>
+      </ul>
+      <%= form_with(url: search_path, method: :get, local: true, class: "d-flex") do |form| %>
+        <%= form.text_field :search, class: "form-control me-2", placeholder: "Search landmarks and regions", aria: { label: "Search" },style: "width: 250px;" %>
+        <button type="submit" class="btn btn-outline-success">
           <i class='fa-solid fa-magnifying-glass'></i>
-          </button>
-        <% end %>
-
-        <ul class="navbar-nav">
+        </button>
+      <% end %>
+      <ul class="navbar-nav">
         <% if user_signed_in? %>
-        <li class="nav-item btn-group">
-          <button class="btn dropdown-toggle role=" button " data-bs-toggle=" dropdown " aria-expanded=" false ">
-            <%= current_user.username %>
-          </button>
-          <ul class=" dropdown-menu dropdown-menu-end ">
-            <li>
-  <%= button_to edit_user_registration_path, method: :get, class: "dropdown-item text-center" do %>
-    Account Profile
-  <% end %>
-</li>
+          <li class="nav-item btn-group">
+            <button class="btn dropdown-toggle role=" button " data-bs-toggle=" dropdown " aria-expanded=" false ">
+              <%= current_user.username %>
+            </button>
+            <ul class=" dropdown-menu dropdown-menu-end ">
+              <li>
+                <%= button_to edit_user_registration_path, method: :get, class: "dropdown-item text-center" do %>
+                  Account Profile
+                <% end %>
+              </li>
               <li><%= button_to destroy_user_session_path, method: :delete, class: "dropdown-item text-center"  do %>
-                <i class=" fas fa-right-from-bracket "></i> Sign Out
-              <% end %></li>
-          </ul>
-
-            <% else %>
-              <li class=" nav-item ">
+                  <i class=" fas fa-right-from-bracket "></i> Sign Out
+                <% end %></li>
+            </ul>
+          <% else %>
+            <li class=" nav-item ">
               <%= link_to new_user_session_path, class: "nav-link active" do %>
                 <i class=" fa-solid fa-right-to-bracket "></i> Sign In
               <% end %>
             </li>
-
             <li class=" nav-item ">
               <%= link_to new_user_registration_path, class: "nav-link active" do %>
                 <i class=" fa-solid fa-user "></i> Sign Up
               <% end %>
             </li>
-            <% end %>
-      </ul>
-
+          <% end %>
+        </ul>
       </div>
     </div>
   </nav>

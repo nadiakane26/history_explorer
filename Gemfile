@@ -84,3 +84,5 @@ gem "activeadmin"
 gem "rufo", "~> 0.18.0"
 
 gem "erb_lint", "~> 0.8.0"
+
+gem "htmlbeautifier", "~> 1.4"
