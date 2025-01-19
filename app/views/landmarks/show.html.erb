@@ -1,21 +1,23 @@
 <% content_for :javascript do %>
   <script type="module">
-  import "landmark";
-  import "load_more";
+    import "landmark";
+    import "load_more";
   </script>
-  <%end%>
-
-  <%= javascript_tag do %>
-  var landmark = {
-    lat: <%= @landmark.latitude %>,
-    lng: <%= @landmark.longitude %>,
-    title: "<%=@landmark.name%>",
-    address: "<%=@landmark.address%>"
-  };
 <% end %>
+<script>
+  //<![CDATA[
 
+    var landmark = {
+      lat: <%= @landmark.latitude %>,
+      lng: <%= @landmark.longitude %>,
+      title: "<%= @landmark.name %>",
+      address: "<%= @landmark.address %>"
+    };
+
+  //]]>
+</script>
 <% content_for :title, @landmark.name %>
-<%=Time.zone.now %>
+<%= Time.zone.now %>
 <div class="row justify-content-between">
   <!-- Main content on the left side -->
   <div class="col-lg-8">
@@ -24,13 +26,12 @@
       <span class="btn btn-outline-<%= region_color(@landmark.region) %> btn-sm disabled">
         <%= @landmark.region.name %>
       </span>
-
       <% if user_signed_in? %>
         <!-- Save/Unsave Button (Bookmark) -->
         <!--If the landmark is saved, delete it using landmark's slug and id of the save record-->
         <!--If the landmark is not saved, save it-->
-        <%= button_to (current_user && current_user.saved_landmarks.include?(@landmark)) ? 
-                      landmark_safe_path(landmark_slug: @landmark.slug, id: current_user.saves.find_by(landmark: @landmark).id) : 
+        <%= button_to (current_user && current_user.saved_landmarks.include?(@landmark)) ?
+                      landmark_safe_path(landmark_slug: @landmark.slug, id: current_user.saves.find_by(landmark: @landmark).id) :
                       landmark_saves_path(landmark_slug: @landmark.slug),
                       method: (current_user && current_user.saved_landmarks.include?(@landmark) ? :delete : :post),
                       class: "btn btn-link p-0 d-flex align-items-center" do %>
@@ -38,21 +39,18 @@
         <% end %>
       <% end %>
     </h1>
-
     <p>
       <span class="text-muted small">
-        <%= @landmark.user.username %> | <i class="fa-regular fa-calendar ms-2"></i> 
+        <%= @landmark.user.username %> | <i class="fa-regular fa-calendar ms-2"></i>
         <%= @landmark.created_at.strftime("%B %d, %Y") %>
       </span>
     </p>
-
     <p><%= @landmark.address %></p>
-
     <% if @landmark.images.attached? %>
       <div id="landmark-carousel" class="carousel slide">
         <div class="carousel-indicators">
           <% @landmark.images.each_with_index do |image, index| %>
-            <button type="button" data-bs-target="#landmark-carousel" data-bs-slide-to="<%= index %>" 
+            <button type="button" data-bs-target="#landmark-carousel" data-bs-slide-to="<%= index %>"
                     class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index + 1 %>"></button>
           <% end %>
         </div>
@@ -73,36 +71,30 @@
         </button>
       </div>
     <% end %>
-
     <p><%= @landmark.description %></p>
-
     <div class="button-container d-flex align-items-center gap-2 custom-lead">
       <% if @landmark.user == current_user %>
         <%= link_to "Edit", edit_landmark_path(@landmark), class: "btn btn-warning btn-sm" %>
-        <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm", 
+        <%= button_to "Delete", @landmark, method: :delete, class: "btn btn-danger btn-sm",
                       data: { confirm: "Are you sure you want to delete this landmark?" } %>
       <% end %>
       <%= link_to "Back", landmarks_path, class: "btn btn-secondary btn-sm" %>
       <%= render 'likes/like_button', likeable: @landmark %>
     </div>
-
     <div id="map"></div>
   </div>
-
   <!-- Comments on the right side -->
   <div id="comments-container" class="col-lg-4">
     <h4>Comments</h4>
     <div id="comments">
       <%= render @comments %>
     </div>
-
     <% if @comments.next_page %>
       <div id="load-more-container">
-        <%= link_to 'Load More', landmark_path(@landmark, page: @comments.next_page), remote: true, 
+        <%= link_to 'Load More', landmark_path(@landmark, page: @comments.next_page), remote: true,
                     id: 'load-more-comments', class: 'btn btn-light btn-small mb-3' %>
       </div>
     <% end %>
-
     <h4>Join the Conversation:</h4>
     <%= render "comments/form", landmark: @landmark %>
   </div>

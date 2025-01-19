@@ -1,15 +1,20 @@
 ActiveAdmin.register Region do
+  # Permit the necessary fields for Region model
   permit_params :name, :description, :user_id, :slug
 
-    # Controller block to check CanCanCan permissions
-    controller do
-  
-      # Custom resource finding based on slug
-      def find_resource
-        scoped_collection.find_by_slug(params[:id])
-      end
-    end  
-  
+  controller do
+    # Custom resource finding based on slug
+    def find_resource
+      scoped_collection.find_by_slug(params[:id])
+    end
+  end
+
+  filter :name
+  filter :description
+  filter :user
+  filter :created_at
+
+  # Show specific columns on the index page
   index do
     selectable_column
     id_column
@@ -37,7 +42,7 @@ ActiveAdmin.register Region do
     end
     active_admin_comments
   end
-
+  
   form do |f|
     f.inputs do
       f.input :name

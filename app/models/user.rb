@@ -14,18 +14,14 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :username, presence: true, uniqueness: true
 
-  after_initialize :set_default_role, if: :new_record?
-
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "encrypted_password", "first_name", "id", "id_value", "last_name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at", "username"]
+    [ "created_at", "email", "encrypted_password", "first_name", "id", "id_value", "last_name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at", "username", "admin" ]
   end
 
-def set_default_role
-  self.admin ||= false
-end
+  def self.ransackable_associations(auth_object = nil)
+    [ "comments", "landmarks", "regions", "saved_landmarks", "saves", "votes" ]
+  end
 
-def admin?
-  self.admin
-end
 
+  private
 end

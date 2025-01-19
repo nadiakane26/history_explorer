@@ -7,23 +7,23 @@ resources :regions, param: :slug
 resources :landmarks, param: :slug do
   # Voting actions for landmarks
   member do
-    put 'like', to: 'landmarks#like'
-    put 'unlike', to: 'landmarks#unlike'
+    put "like", to: "landmarks#like"
+    put "unlike", to: "landmarks#unlike"
   end
 
   # Nesting comments under landmarks
-  resources :comments, only: [:create, :edit, :update, :destroy] do
+  resources :comments, only: [ :create, :edit, :update, :destroy ] do
     member do
-      put 'like', to: 'comments#like'
-      put 'unlike', to: 'comments#unlike'
+      put "like", to: "comments#like"
+      put "unlike", to: "comments#unlike"
     end
   end
   resources :saves, only: [ :create, :destroy ]
 end
 
 
-  
-  
+
+
 
 
 

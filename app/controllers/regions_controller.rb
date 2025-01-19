@@ -62,17 +62,14 @@ class RegionsController < ApplicationController
   end
 
   private
+
   def set_region
     @region = Region.friendly.find(params[:slug])
   end
 
-  def authorize_manage
-    # Permission to manage regions
-    authorize! :manage, Region  # This checks :create, :update, :destroy, :new, :edit
+  # Only allow a list of trusted parameters through.
+  def region_params
+    params.expect(region: [ :name, :description, :user_id ])
   end
 
-    # Only allow a list of trusted parameters through.
-    def region_params
-      params.expect(region: [ :name, :description, :user_id ])
-    end
 end

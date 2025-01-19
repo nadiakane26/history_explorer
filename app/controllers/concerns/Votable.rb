@@ -1,14 +1,14 @@
 module Votable
   extend ActiveSupport::Concern
-  
+
   included do
-    before_action :find_likeable, only: [:like, :unlike]
-    before_action :authenticate_user!, only: [:like, :unlike]
+    before_action :find_likeable, only: [ :like, :unlike ]
+    before_action :authenticate_user!, only: [ :like, :unlike ]
   end
-  
+
   def like
     @likeable.upvote_by(current_user)
-    
+
     respond_to do |format|
       format.html { redirect_back(fallback_location: @likeable) }
       format.turbo_stream do
@@ -17,10 +17,10 @@ module Votable
       end
     end
   end
-  
+
   def unlike
     @likeable.unvote_by(current_user)
-    
+
     respond_to do |format|
       format.html { redirect_back(fallback_location: @likeable) }
       format.turbo_stream do
@@ -29,9 +29,9 @@ module Votable
       end
     end
   end
-  
+
   private
-  
+
   def find_likeable
     if params[:controller] == "landmarks"
       @likeable = Landmark.friendly.find(params[:slug])

@@ -1,27 +1,23 @@
 <div class="card mb-3">
-<div class="card-body custom-lead">
+  <div class="card-body custom-lead">
     <!-- Commenter Name -->
-    <strong><%= comment.user&.username%></strong>
+    <strong><%= comment.user&.username %></strong>
     <i class="fas fa-clock fa-xs text-muted"></i>
     <!-- Display comment creation time -->
     <small class="text-muted ml-1">
-    <%= comment.updated_at.strftime("%b %d, %Y %I:%M %p")%>
+      <%= comment.updated_at.strftime("%b %d, %Y %I:%M %p") %>
     </small>
-    
     <p class="card-text">
-        <%= comment.body %>
-      </p>
-
-      <div class="button-container d-flex align-items-center gap-2">
+      <%= comment.body %>
+    </p>
+    <div class="button-container d-flex align-items-center gap-2">
       <!-- Delete Button -->
-       <% if current_user == comment.user || current_user %>
-      <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
-      <%= link_to "Edit", edit_landmark_comment_path(@landmark, comment), class: "btn btn-warning btn-sm" %>
+      <% if current_user == comment.user || current_user %>
+        <%= button_to "Delete", landmark_comment_path(@landmark, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+        <%= link_to "Edit", edit_landmark_comment_path(@landmark, comment), class: "btn btn-warning btn-sm" %>
       <% end %>
       <!-- Like/Unlike Button -->
       <%= render 'likes/like_button', likeable: comment %>
     </div>
-
-    </div>
   </div>
-
+</div>

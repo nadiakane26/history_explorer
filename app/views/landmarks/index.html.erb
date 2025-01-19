@@ -17,19 +17,16 @@
       <%= render partial: "landmarks/landmark_card", locals: { landmark: landmark } %>
     <% end %>
   </div>
-
   <nav aria-label="Pagination">
     <ul class="pagination">
       <li class="page-item <%= 'disabled' if @landmarks.previous_page.nil? %>">
         <%= link_to 'Previous', landmarks_path(page: @landmarks.previous_page), class: 'page-link' %>
       </li>
-
       <% (1..@landmarks.total_pages).each do |page| %>
         <li class="page-item <%= 'active' if @landmarks.current_page == page %>">
           <%= link_to page, landmarks_path(page: page), class: 'page-link' %>
         </li>
       <% end %>
-
       <li class="page-item <%= 'disabled' if @landmarks.next_page.nil? %>">
         <%= link_to 'Next', landmarks_path(page: @landmarks.next_page), class: 'page-link' %>
       </li>

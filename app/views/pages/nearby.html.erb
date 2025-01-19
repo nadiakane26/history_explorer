@@ -1,22 +1,19 @@
 <% content_for :javascript do %>
   <script type="module">
-  import "nearby";
-
+    import "nearby";
   </script>
-  <%end%>
-
+<% end %>
 <div id="container">
-<h2> Historical Landmarks by Google </h2>
-<input id="search-box" type="text" class="form-control" placeholder="Search for a location" />
-<div id="map" class="mt-3"></div>
-<div id="landmark-list" class="mt-3">
-      <h4>Landmarks List</h4>
-      <ul id="landmarks" class="list-group list-group-flush">
+  <h2> Historical Landmarks by Google </h2>
+  <input id="search-box" type="text" class="form-control" placeholder="Search for a location">
+  <div id="map" class="mt-3"></div>
+  <div id="landmark-list" class="mt-3">
+    <h4>Landmarks List</h4>
+    <ul id="landmarks" class="list-group list-group-flush">
       <li class="list-group-item list-group-item-action">
       </li>
-      </ul>
-    </div>
+    </ul>
+  </div>
 </div>
-
 <div id="map"></div>
 <% content_for :title, "Nearby Landmarks" %>
