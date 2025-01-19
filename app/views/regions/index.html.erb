@@ -9,7 +9,7 @@
           <p>Click on a region to explore all the related landmarks or create a new one.</p>
         <hr class="my-4">
         <p>There are <%= Region.count %> regions, each represented by a unique color!</p>
-      
+
           <p>
             <%= link_to "Create a New Region", new_region_path, class: "btn btn-dark btn-lg" %>
           </p>
@@ -32,11 +32,10 @@
   </div>
 </div>
 
-
 <div class="row row-cols-1 row-cols-md-2 g-4 mb-4 custom-lead">
   <% @regions.each do |region| %>
     <div class="col">
-      <div class="card h-100 border-<%=region_color(region)%>">
+      <div class="card h-100 border-<%= region_color(region) %>">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title"><%= region.name %></h5>
           <p class="card-text">

@@ -2,12 +2,12 @@
 <div class="row">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-horizontal") do |f| %>
       <div class="mb-3 custom-lead custom-lead">
-        <%= f.label :email,class: "form-label" %><br />
+        <%= f.label :email,class: "form-label" %><br>
         <%= f.email_field :email, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="mb-3 custom-lead">
-        <%= f.label :password, class: "form-label" %><br />
+        <%= f.label :password, class: "form-label" %><br>
         <%= f.password_field :password, class: "form-control" %>
       </div>
 

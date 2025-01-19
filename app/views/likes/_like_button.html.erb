@@ -1,15 +1,15 @@
 <% if current_user %>
   <% if likeable.voted_up_by?(current_user) %>
     <!-- Unlike Button -->
-    <%= button_to unlike_path(likeable), 
-                  method: :put, 
+    <%= button_to unlike_path(likeable),
+                  method: :put,
                   class: "btn btn-primary btn-sm" do %>
       Unlike <i class="fa-regular fa-thumbs-down"></i>
     <% end %>
   <% else %>
     <!-- Like Button -->
-    <%= button_to like_path(likeable), 
-                  method: :put, 
+    <%= button_to like_path(likeable),
+                  method: :put,
                   class: "btn btn-primary btn-sm" do %>
       Like <i class="fa-regular fa-thumbs-up"></i>
     <% end %>

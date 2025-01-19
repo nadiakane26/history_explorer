@@ -22,8 +22,8 @@
         <% if user_signed_in? %>
           <!-- Bookmark Button -->
           <% saved = current_user.saved_landmarks.include?(landmark) %>
-          <%= button_to saved ? 
-                        landmark_safe_path(landmark_slug: landmark.slug, id: current_user.saves.find_by(landmark: landmark).id) : 
+          <%= button_to saved ?
+                        landmark_safe_path(landmark_slug: landmark.slug, id: current_user.saves.find_by(landmark: landmark).id) :
                         landmark_saves_path(landmark_slug: landmark.slug),
                         method: saved ? :delete : :post,
                         class: "btn btn-link p-0 ms-2",
@@ -35,13 +35,13 @@
 
       <!-- Landmark Name-->
       <h5 class="card-title">
-        <%= content_tag :span, landmark.name, class: "text-decoration-none" %>    
+        <%= content_tag :span, landmark.name, class: "text-decoration-none" %>
       </h5>
 
       <!-- Landmark Author and Date -->
       <p class="card-text text-muted custom-lead">
         <span>
-          <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.strftime("%B %d, %Y") %> 
+          <%= landmark.user.username %> |<i class="fa-regular fa-calendar ms-2"></i> <%= landmark.created_at.strftime("%B %d, %Y") %>
         </span>
       </p>
 
