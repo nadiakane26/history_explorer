@@ -20,16 +20,34 @@ ActiveAdmin.register Region do
     id_column
     column :name
     column :description
+    column :user
     column :slug
+    column :created_at
     actions
   end
 
-  # Configure form fields for creating/editing regions
+  filter :name
+  filter :description
+  filter :user
+  filter :created_at
+
+  show do
+    attributes_table do
+      row :name
+      row :description
+      row :user
+      row :slug
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+  
   form do |f|
     f.inputs do
       f.input :name
       f.input :description
-      f.input :user
+      f.input :user, as: :select, collection: User.all
       f.input :slug
     end
     f.actions

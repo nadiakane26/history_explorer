@@ -81,6 +81,7 @@ ActiveAdmin.setup do |config|
   # CanCanAdapter or make your own. Please refer to documentation.
   # config.authorization_adapter = ActiveAdmin::CanCanAdapter
 
+
   # In case you prefer Pundit over other solutions you can here pass
   # the name of default policy class. This policy will be used in every
   # case when Pundit is unable to find suitable policy.
@@ -109,6 +110,7 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
   config.current_user_method = :current_admin_user
+
 
   # == Logging Out
   #
@@ -175,6 +177,7 @@ ActiveAdmin.setup do |config|
   # added to forms, or exported by default by ActiveAdmin
   #
   config.filter_attributes = [ :encrypted_password, :password, :password_confirmation ]
+
 
   # == Localize Date/Time Format
   #

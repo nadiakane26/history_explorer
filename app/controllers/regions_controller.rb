@@ -1,6 +1,8 @@
 class RegionsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_region, except: [ :index, :new, :create ]
+  before_action :authorize_manage, except: [ :index, :show ]
+
 
   # GET /regions or /regions.json
   def index
@@ -69,4 +71,5 @@ class RegionsController < ApplicationController
   def region_params
     params.expect(region: [ :name, :description, :user_id ])
   end
+
 end

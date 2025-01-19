@@ -22,5 +22,6 @@ class User < ApplicationRecord
     [ "comments", "landmarks", "regions", "saved_landmarks", "saves", "votes" ]
   end
 
+
   private
 end
