@@ -9,7 +9,6 @@ class LandmarksController < ApplicationController
     @saved_landmarks = current_user&.saved_landmarks || []
   end
 
-
   # GET /landmarks/1 or /landmarks/1.json
   def show
     @saved_landmarks = current_user&.saved_landmarks || []
@@ -71,25 +70,24 @@ class LandmarksController < ApplicationController
 
   include Votable
 
-
   private
 
   def set_landmark
     @landmark = Landmark.friendly.find(params[:slug])
   end
 
-    # Only allow a list of trusted parameters through.
-    def landmark_params
-      params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: [] ])
-    end
+  # Only allow a list of trusted parameters through.
+  def landmark_params
+    params.expect(landmark: [ :name, :address, :description, :user_id, :region_id, :latitude, :longitude, images: [] ])
+  end
 
-    def verify_landmark_user
-      @landmark = Landmark.friendly.find(params[:slug])
-      unless @landmark.user == current_user ||
-        respond_to do |format|
-            format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
-            format.json { render :show, status: :ok, location: @landmark }
-      end
-      end
+  def verify_landmark_user
+    @landmark = Landmark.friendly.find(params[:slug])
+    unless @landmark.user == current_user ||
+           respond_to do |format|
+             format.html { redirect_to @landmark, alert: "You are not authorized to modify this landmark." }
+             format.json { render :show, status: :ok, location: @landmark }
+           end
+    end
   end
 end

@@ -6,7 +6,6 @@ class Region < ApplicationRecord
 
   has_many :landmarks
 
-
   def self.ransackable_attributes(auth_object = nil)
     %w[id name description created_at updated_at] # Add attributes you want to be searchable
   end

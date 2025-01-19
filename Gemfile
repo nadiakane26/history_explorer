@@ -80,3 +80,5 @@ gem "acts_as_votable"
 gem "sassc"
 
 gem "activeadmin"
+
+gem "rufo", "~> 0.18.0"
