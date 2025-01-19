@@ -3,13 +3,12 @@ ActiveAdmin.register Region do
   permit_params :name, :description, :user_id, :slug
 
   controller do
-
     # Custom resource finding based on slug
     def find_resource
       scoped_collection.find_by_slug(params[:id])
     end
   end
-  
+
   filter :name
   filter :description
   filter :user

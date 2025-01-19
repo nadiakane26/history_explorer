@@ -8,7 +8,7 @@ module ApplicationHelper
           raise "Unsupported likeable type"
         end
       end
-    
+
       def unlike_path(likeable)
         if likeable.is_a?(Landmark)
           unlike_landmark_path(likeable)

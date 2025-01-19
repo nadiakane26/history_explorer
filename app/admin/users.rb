@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   # Permit necessary fields for the User model
-  permit_params :first_name, :last_name, :username, :email, :password, 
+  permit_params :first_name, :last_name, :username, :email, :password,
                 :password_confirmation, :admin, :slug
 
   # Add filters

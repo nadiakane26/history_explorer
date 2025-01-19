@@ -41,6 +41,4 @@ class CommentsController < ApplicationController
       def comment_params
         params.expect(comment: [ :body ])
       end
-
-  
 end
